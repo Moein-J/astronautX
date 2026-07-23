@@ -32,6 +32,11 @@ export function useHeroParallax() {
 
     // Desktop Animation (Pinned 3D Zoom, Perspective Drift & Smooth Scroll Text Callouts)
     mm.add("(min-width: 768px)", () => {
+      // Dynamic vertical shift calculated relative to device height
+      const screenH = typeof window !== "undefined" ? window.innerHeight : 800;
+      const maxY = Math.min(screenH * 0.18, 140);
+      const targetScale = screenH < 750 ? 1.35 : 1.75;
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: container,
@@ -55,7 +60,7 @@ export function useHeroParallax() {
         heroContent,
         {
           opacity: 0,
-          y: -100,
+          y: -Math.min(screenH * 0.12, 90),
           scale: 0.9,
           duration: 0.35,
           ease: "power2.inOut",
@@ -64,26 +69,28 @@ export function useHeroParallax() {
       );
 
       // Scroll hint fades out
-      tl.to(scrollHint, { opacity: 0, y: 30, duration: 0.2 }, 0);
+      if (scrollHint) {
+        tl.to(scrollHint, { opacity: 0, y: 20, duration: 0.2 }, 0);
+      }
 
       // Cosmic background ring scale
       if (starRing) {
         tl.to(
           starRing,
-          { scale: 3.5, rotate: 120, opacity: 0.15, duration: 1 },
+          { scale: 2.8, rotate: 120, opacity: 0.15, duration: 1 },
           0,
         );
       }
 
-      // Astronaut rig scaling & floating perspective movement
+      // Astronaut rig scaling & floating perspective movement with dynamic screen-height bounding
       tl.to(
         astroWrapper,
         {
-          scale: 1.8,
-          y: -180,
-          x: 20,
-          rotateZ: -12,
-          rotateY: 15,
+          scale: targetScale,
+          y: -maxY,
+          x: 15,
+          rotateZ: -10,
+          rotateY: 12,
           duration: 1,
           ease: "sine.inOut",
         },
@@ -94,7 +101,7 @@ export function useHeroParallax() {
       if (c1) {
         tl.fromTo(
           c1,
-          { opacity: 0, x: -40, scale: 0.9 },
+          { opacity: 0, x: -30, scale: 0.9 },
           { opacity: 1, x: 0, scale: 1, duration: 0.2, ease: "power2.out" },
           0.18,
         );
@@ -113,7 +120,7 @@ export function useHeroParallax() {
       if (c2) {
         tl.fromTo(
           c2,
-          { opacity: 0, x: 40, scale: 0.9 },
+          { opacity: 0, x: 30, scale: 0.9 },
           { opacity: 1, x: 0, scale: 1, duration: 0.2, ease: "power2.out" },
           0.44,
         );
@@ -132,7 +139,7 @@ export function useHeroParallax() {
       if (c3) {
         tl.fromTo(
           c3,
-          { opacity: 0, y: 30, scale: 0.9 },
+          { opacity: 0, y: 15, scale: 0.9 },
           { opacity: 1, y: 0, scale: 1, duration: 0.2, ease: "power2.out" },
           0.66,
         );
@@ -144,7 +151,7 @@ export function useHeroParallax() {
       }
     });
 
-    // Mobile Layout (NO PINNING: Clean, unpinned responsive layout for 100% mobile stability)
+    // Mobile Layout (NO PINNING: Clean, unpinned responsive layout)
     mm.add("(max-width: 767px)", () => {
       gsap.set(heroContent, { opacity: 1, y: 0, scale: 1 });
       gsap.set(astroWrapper, { opacity: 1, y: 0, scale: 1, rotateZ: 0 });

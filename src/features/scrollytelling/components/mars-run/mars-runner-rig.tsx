@@ -13,17 +13,17 @@ export function MarsRunnerRig({
   astroRunnerRef,
 }: TMarsRunnerRigProps) {
   return (
-    /* Central Orbit Ring Container matched precisely to Mars center */
+    /* Central Orbit Ring Container matched dynamically to Mars center and height */
     <div
       ref={astroOrbitRef}
-      className="absolute inset-0 m-auto w-56 h-56 sm:w-72 sm:h-72 md:w-96 md:h-96 lg:w-[480px] lg:h-[480px] rounded-full pointer-events-none z-30"
+      className="absolute inset-0 m-auto w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-[420px] lg:h-[420px] max-h-[38vh] max-w-[38vh] rounded-full pointer-events-none z-30"
     >
       {/* Astronaut positioned right on top of the circular rim of Mars */}
       <div
         ref={astroRunnerRef}
         className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-[80%] flex flex-col items-center origin-bottom"
       >
-        <div className="transform -rotate-6 scale-40 sm:scale-50 md:scale-60 lg:scale-70">
+        <div className="transform -rotate-6 scale-35 sm:scale-45 md:scale-55 lg:scale-65">
           <AstronautRig scale={0.4} />
         </div>
 

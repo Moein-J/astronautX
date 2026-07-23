@@ -32,7 +32,7 @@ const TELEMETRY_CALLOUTS: TTelemetryItem[] = [
     badgeBg: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
     textColor: "text-cyan-400",
     positionClasses:
-      "-top-4 left-2 md:left-4 lg:-left-4 xl:-left-12 w-60 md:w-64 lg:w-72 max-w-[90vw]",
+      "top-0 left-2 md:left-4 lg:-left-4 xl:-left-12 w-60 md:w-64 lg:w-72 max-w-[90vw]",
   },
   {
     id: "maxq",
@@ -60,7 +60,7 @@ const TELEMETRY_CALLOUTS: TTelemetryItem[] = [
     badgeBg: "bg-indigo-500/20 text-indigo-300 border-indigo-500/30",
     textColor: "text-indigo-300",
     positionClasses:
-      "-bottom-6 left-1/2 -translate-x-1/2 w-64 md:w-72 lg:w-80 max-w-[90vw] text-center",
+      "bottom-2 md:bottom-4 lg:bottom-6 left-1/2 -translate-x-1/2 w-64 md:w-72 lg:w-80 max-w-[90vw] text-center",
   },
 ];
 

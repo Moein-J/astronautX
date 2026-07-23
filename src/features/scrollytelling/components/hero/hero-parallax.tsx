@@ -31,13 +31,13 @@ export function HeroParallax(props: THeroParallaxProps) {
   return (
     <div
       ref={containerRef}
-      className="relative w-full min-h-dvh flex flex-col items-center justify-between py-10 md:py-16 px-4 md:px-6 overflow-hidden bg-linear-to-b from-slate-950 via-slate-900/60 to-slate-950"
+      className="relative w-full min-h-dvh flex flex-col items-center justify-between py-6 sm:py-8 md:py-12 px-4 md:px-6 overflow-hidden bg-linear-to-b from-slate-950 via-slate-900/60 to-slate-950"
     >
       {/* Background Cosmic Energy Ring */}
       <HeroBackgroundRing starRingRef={starRingRef} />
 
       {/* Top Header Badge Spacer */}
-      <div className="h-2 md:h-6" />
+      <div className="h-1 sm:h-3 md:h-4" />
 
       {/* Hero Central Content */}
       <HeroContent
@@ -49,13 +49,15 @@ export function HeroParallax(props: THeroParallaxProps) {
       />
 
       {/* Floating Astronaut Rig & Telemetry Callouts Overlay */}
-      <div className="relative z-10 my-3 md:my-6 flex items-center justify-center w-full max-w-4xl">
+      <div className="relative z-10 my-2 sm:my-4 md:my-6 flex items-center justify-center w-full max-w-4xl">
         <HeroAstronautWrapper astroWrapperRef={astroWrapperRef} />
         <HeroTelemetryCallouts calloutsRef={calloutsRef} />
       </div>
 
-      {/* Scroll Hint — Centered */}
-      <HeroScrollHint scrollHintRef={scrollHintRef} />
+      {/* Scroll Hint — Centered & hidden on short height screens (<680px) to prevent vertical overflow */}
+      <div className="max-h-[680px]:hidden items-center justify-center">
+        <HeroScrollHint scrollHintRef={scrollHintRef} />
+      </div>
     </div>
   );
 }

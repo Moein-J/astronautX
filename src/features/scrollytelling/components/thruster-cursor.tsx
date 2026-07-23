@@ -20,10 +20,10 @@ export function ThrusterCursor({ className }: TThrusterCursorProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
-    // Disable completely on mobile touch devices
+    // Only disable on mobile viewports (<768px), allowing laptops (including touch laptops) to show thruster particles
     if (
       typeof window !== "undefined" &&
-      window.matchMedia("(max-width: 767px), (pointer: coarse)").matches
+      window.matchMedia("(max-width: 767px)").matches
     ) {
       return;
     }

@@ -10,12 +10,12 @@ export function MarsPlanetSphere({ marsPlanetRef }: TMarsPlanetSphereProps) {
   return (
     <div className="relative flex items-center justify-center pointer-events-none">
       {/* Outer Atmospheric Red Glow Ring */}
-      <div className="absolute w-64 h-64 sm:w-80 sm:h-80 md:w-112 md:h-112 lg:w-140 lg:h-140 rounded-full bg-radial from-red-600/30 via-orange-600/15 to-transparent blur-2xl" />
+      <div className="absolute w-56 h-56 sm:w-72 sm:h-72 md:w-96 md:h-96 lg:w-128 lg:h-128 rounded-full bg-radial from-red-600/30 via-orange-600/15 to-transparent blur-2xl" />
 
-      {/* Rotating Mars Circle */}
+      {/* Rotating Mars Circle matched dynamically to screen height */}
       <div
         ref={marsPlanetRef}
-        className="relative w-56 h-56 sm:w-72 sm:h-72 md:w-96 md:h-96 lg:w-[480px] lg:h-[480px] rounded-full shadow-[0_0_60px_rgba(239,68,68,0.4)] border-2 border-red-500/40 overflow-hidden"
+        className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-[420px] lg:h-[420px] max-h-[38vh] max-w-[38vh] rounded-full shadow-[0_0_60px_rgba(239,68,68,0.4)] border-2 border-red-500/40 overflow-hidden"
       >
         <svg viewBox="0 0 400 400" className="w-full h-full">
           <defs>

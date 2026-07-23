@@ -21,10 +21,10 @@ export function StarfieldBackground({ className }: TStarfieldBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
-    // Disable background canvas execution on mobile touch screens for maximum performance & battery life
+    // Only disable background canvas on mobile viewports (<768px), keeping laptops (including touch laptops) fully enabled
     if (
       typeof window !== "undefined" &&
-      window.matchMedia("(max-width: 767px), (pointer: coarse)").matches
+      window.matchMedia("(max-width: 767px)").matches
     ) {
       return;
     }
