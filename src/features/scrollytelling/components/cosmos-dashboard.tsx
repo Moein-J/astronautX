@@ -118,7 +118,7 @@ export function CosmosDashboard({ className = "" }: TCosmosDashboardProps) {
                 <span className="text-slate-400">PACKET BUFFER: 100%</span>
               </div>
               <div className="h-2 rounded-full bg-slate-800 overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-500 animate-pulse w-full" />
+                <div className="h-full bg-linear-to-r from-cyan-500 via-indigo-500 to-purple-500 animate-pulse w-full" />
               </div>
             </div>
           </div>
@@ -176,7 +176,7 @@ export function CosmosDashboard({ className = "" }: TCosmosDashboardProps) {
               {dockingStatus === "IDLE" && (
                 <button
                   onClick={handleInitiateDocking}
-                  className="px-8 py-3.5 rounded-full bg-gradient-to-r from-cyan-500 to-indigo-600 text-white font-bold text-xs tracking-wider shadow-lg shadow-cyan-500/25 hover:scale-105 active:scale-95 transition-all"
+                  className="px-8 py-3.5 rounded-full bg-linear-to-r from-cyan-500 to-indigo-600 text-white font-bold text-xs tracking-wider shadow-lg shadow-cyan-500/25 hover:scale-105 active:scale-95 transition-all"
                 >
                   INITIATE AUTOMATED DOCKING
                 </button>

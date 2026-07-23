@@ -86,12 +86,12 @@ export function HeroParallax({
   return (
     <div
       ref={containerRef}
-      className="relative w-full min-h-[100dvh] flex flex-col items-center justify-between py-10 md:py-16 px-4 md:px-6 overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900/60 to-slate-950"
+      className="relative w-full min-h-dvh flex flex-col items-center justify-between py-10 md:py-16 px-4 md:px-6 overflow-hidden bg-linear-to-b from-slate-950 via-slate-900/60 to-slate-950"
     >
       {/* Background Cosmic Energy Ring */}
       <div
         ref={starRingRef}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[650px] h-[300px] md:h-[650px] rounded-full border border-cyan-500/20 bg-radial from-cyan-500/15 via-purple-600/10 to-transparent blur-3xl pointer-events-none"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-75 md:w-162.5 h-75 md:h-162.5 rounded-full border border-cyan-500/20 bg-radial from-cyan-500/15 via-purple-600/10 to-transparent blur-3xl pointer-events-none"
       />
 
       {/* Top Header Badge Spacer */}
@@ -107,7 +107,7 @@ export function HeroParallax({
           <span>{badgeText}</span>
         </div>
 
-        <h1 className="text-3xl sm:text-5xl md:text-7xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-100 to-indigo-300 drop-shadow-md leading-[1.12]">
+        <h1 className="text-3xl sm:text-5xl md:text-7xl font-extrabold tracking-tight text-transparent bg-clip-text bg-linear-to-r from-white via-cyan-100 to-indigo-300 drop-shadow-md leading-[1.12]">
           {title}
         </h1>
 
@@ -118,7 +118,7 @@ export function HeroParallax({
         <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto px-2 sm:px-0">
           <a
             href="#journey"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3 md:px-8 md:py-3.5 rounded-full bg-gradient-to-r from-cyan-500 via-indigo-500 to-blue-600 text-white font-semibold text-xs md:text-base tracking-wide shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 hover:scale-105 transition-all duration-300 active:scale-95"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3 md:px-8 md:py-3.5 rounded-full bg-linear-to-r from-cyan-500 via-indigo-500 to-blue-600 text-white font-semibold text-xs md:text-base tracking-wide shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 hover:scale-105 transition-all duration-300 active:scale-95"
           >
             <span>{ctaText}</span>
             <Orbit className="w-4 h-4 text-cyan-200" />

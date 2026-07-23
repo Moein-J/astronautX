@@ -33,7 +33,7 @@ export function AstronautRig({
       }}
     >
       {/* Outer Ethereal Cosmic Aura */}
-      <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500/30 via-purple-500/20 to-indigo-500/30 blur-3xl transform scale-150 -z-10 animate-pulse" />
+      <div className="absolute inset-0 rounded-full bg-linear-to-r from-cyan-500/30 via-purple-500/20 to-indigo-500/30 blur-3xl transform scale-150 -z-10 animate-pulse" />
       
       {/* Floating Sparkle Particles around Helmet */}
       <motion.div

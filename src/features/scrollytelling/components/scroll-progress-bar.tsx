@@ -27,7 +27,7 @@ export function ScrollProgressBar({ className = "" }: TScrollProgressBarProps) {
     <div className={`fixed top-0 left-0 right-0 z-50 ${className}`}>
       {/* Glow bar */}
       <div
-        className="h-1 bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-500 shadow-[0_0_12px_rgba(34,211,238,0.8)] transition-all duration-150 ease-out"
+        className="h-1 bg-linear-to-r from-cyan-500 via-indigo-500 to-purple-500 shadow-[0_0_12px_rgba(34,211,238,0.8)] transition-all duration-150 ease-out"
         style={{ width: `${scrollProgress}%` }}
       />
 

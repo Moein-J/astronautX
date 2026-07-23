@@ -4,7 +4,14 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useReducedMotion } from "../hooks/use-reduced-motion";
-import { Shield, Zap, Compass, Radio, Sparkles, CheckCircle2 } from "lucide-react";
+import {
+  Shield,
+  Zap,
+  Compass,
+  Radio,
+  Sparkles,
+  CheckCircle2,
+} from "lucide-react";
 
 type TNarrativeLog = {
   id: string;
@@ -55,12 +62,20 @@ export function JourneyParallax({ logs }: TJourneyParallaxProps) {
 
       // 2. Planet 2 (Cyan Moon) smooth vertical & rotational drift
       if (planetRef2.current) {
-        tl.to(planetRef2.current, { y: -360, rotate: -30, scale: 1.15, ease: "none" }, 0);
+        tl.to(
+          planetRef2.current,
+          { y: -360, rotate: -30, scale: 1.15, ease: "none" },
+          0,
+        );
       }
 
       // 3. Cosmic Nebula Cloud expansion
       if (nebulaRef.current) {
-        tl.to(nebulaRef.current, { y: -180, scale: 1.35, opacity: 0.85, ease: "none" }, 0);
+        tl.to(
+          nebulaRef.current,
+          { y: -180, scale: 1.35, opacity: 0.85, ease: "none" },
+          0,
+        );
       }
 
       // 4. Foreground Stardust Debris Parallax
@@ -80,7 +95,7 @@ export function JourneyParallax({ logs }: TJourneyParallaxProps) {
           validCards,
           { opacity: 0, y: 60, scale: 0.95 },
           { opacity: 1, y: 0, scale: 1, stagger: 0.12, ease: "power2.out" },
-          0.05
+          0.05,
         );
       }
     }, section);
@@ -104,13 +119,19 @@ export function JourneyParallax({ logs }: TJourneyParallaxProps) {
   };
 
   return (
-    <div ref={sectionRef} className="relative w-full py-20 md:py-36 px-4 md:px-6 overflow-hidden">
+    <div
+      ref={sectionRef}
+      className="relative w-full py-20 md:py-36 px-4 md:px-6 overflow-hidden"
+    >
       {/* Background Parallax Planet 1 (Purple Gas Giant with Glowing Rings) */}
       <div
         ref={planetRef1}
-        className="absolute -top-10 -right-20 w-64 md:w-[450px] h-64 md:h-[450px] pointer-events-none z-0 opacity-80"
+        className="absolute -top-10 -right-20 w-64 md:w-112.5 h-64 md:h-112.5 pointer-events-none z-0 opacity-80"
       >
-        <svg viewBox="0 0 200 200" className="w-full h-full drop-shadow-[0_0_50px_rgba(168,85,247,0.35)]">
+        <svg
+          viewBox="0 0 200 200"
+          className="w-full h-full drop-shadow-[0_0_50px_rgba(168,85,247,0.35)]"
+        >
           <defs>
             <radialGradient id="planet1Grad" cx="30%" cy="30%" r="70%">
               <stop offset="0%" stopColor="#c084fc" />
@@ -118,9 +139,29 @@ export function JourneyParallax({ logs }: TJourneyParallaxProps) {
               <stop offset="100%" stopColor="#0f172a" />
             </radialGradient>
           </defs>
-          <ellipse cx="100" cy="100" rx="95" ry="26" fill="none" stroke="#e9d5ff" strokeWidth="4" opacity="0.6" transform="rotate(-18 100 100)" />
+          <ellipse
+            cx="100"
+            cy="100"
+            rx="95"
+            ry="26"
+            fill="none"
+            stroke="#e9d5ff"
+            strokeWidth="4"
+            opacity="0.6"
+            transform="rotate(-18 100 100)"
+          />
           <circle cx="100" cy="100" r="62" fill="url(#planet1Grad)" />
-          <ellipse cx="100" cy="100" rx="95" ry="26" fill="none" stroke="#a855f7" strokeWidth="8" opacity="0.8" transform="rotate(-18 100 100)" />
+          <ellipse
+            cx="100"
+            cy="100"
+            rx="95"
+            ry="26"
+            fill="none"
+            stroke="#a855f7"
+            strokeWidth="8"
+            opacity="0.8"
+            transform="rotate(-18 100 100)"
+          />
         </svg>
       </div>
 
@@ -129,7 +170,10 @@ export function JourneyParallax({ logs }: TJourneyParallaxProps) {
         ref={planetRef2}
         className="absolute top-1/2 -left-24 w-56 md:w-96 h-56 md:h-96 pointer-events-none z-0 opacity-70"
       >
-        <svg viewBox="0 0 200 200" className="w-full h-full drop-shadow-[0_0_40px_rgba(34,211,238,0.25)]">
+        <svg
+          viewBox="0 0 200 200"
+          className="w-full h-full drop-shadow-[0_0_40px_rgba(34,211,238,0.25)]"
+        >
           <radialGradient id="planet2Grad" cx="30%" cy="30%" r="70%">
             <stop offset="0%" stopColor="#38bdf8" />
             <stop offset="55%" stopColor="#0284c7" />
@@ -145,11 +189,14 @@ export function JourneyParallax({ logs }: TJourneyParallaxProps) {
       {/* Cosmic Nebula Cloud */}
       <div
         ref={nebulaRef}
-        className="absolute top-1/4 left-1/3 w-[450px] md:w-[700px] h-[450px] md:h-[700px] rounded-full bg-radial from-indigo-600/20 via-cyan-500/15 to-transparent blur-3xl pointer-events-none z-0"
+        className="absolute top-1/4 left-1/3 w-112.5 md:w-175 h-112.5 md:h-175 rounded-full bg-radial from-indigo-600/20 via-cyan-500/15 to-transparent blur-3xl pointer-events-none z-0"
       />
 
       {/* Foreground Stardust Particles Layer */}
-      <div ref={debrisRef} className="absolute inset-0 pointer-events-none z-10">
+      <div
+        ref={debrisRef}
+        className="absolute inset-0 pointer-events-none z-10"
+      >
         <div className="absolute top-1/5 right-1/4 w-3 h-3 rounded-full bg-cyan-300 opacity-70 shadow-[0_0_10px_#22d3ee] animate-pulse" />
         <div className="absolute top-2/3 right-1/3 w-3.5 h-3.5 rounded-full bg-purple-400 opacity-60 shadow-[0_0_12px_#a855f7]" />
         <div className="absolute top-1/2 left-1/4 w-2 h-2 rounded-full bg-white opacity-90 shadow-[0_0_8px_#ffffff]" />
@@ -163,11 +210,12 @@ export function JourneyParallax({ logs }: TJourneyParallaxProps) {
             <Sparkles className="w-3.5 h-3.5 text-cyan-400 animate-spin-slow" />
             <span>PHASE 02 // DEEP PARALLAX TRAJECTORY</span>
           </span>
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-100 to-indigo-300">
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-linear-to-r from-white via-cyan-100 to-indigo-300">
             Navigating the Deep Void
           </h2>
           <p className="text-slate-300 text-xs sm:text-base md:text-lg leading-relaxed">
-            As altitude increases, environment density shifts. Scroll through key mission milestones logged during trans-orbital transit.
+            As altitude increases, environment density shifts. Scroll through
+            key mission milestones logged during trans-orbital transit.
           </p>
         </div>
 
@@ -177,7 +225,7 @@ export function JourneyParallax({ logs }: TJourneyParallaxProps) {
           <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-0.5 bg-slate-800 hidden md:block">
             <div
               ref={progressBeamRef}
-              className="w-full h-full bg-gradient-to-b from-cyan-400 via-indigo-500 to-purple-500 origin-top transform scale-y-0 shadow-[0_0_15px_rgba(34,211,238,0.8)]"
+              className="w-full h-full bg-linear-to-b from-cyan-400 via-indigo-500 to-purple-500 origin-top transform scale-y-0 shadow-[0_0_15px_rgba(34,211,238,0.8)]"
             />
           </div>
 
@@ -204,8 +252,12 @@ export function JourneyParallax({ logs }: TJourneyParallaxProps) {
                     </span>
                   </div>
                   <div className="text-right font-mono text-xs text-slate-400">
-                    <span className="text-cyan-300 font-bold text-sm">{log.metric}</span>{" "}
-                    <span className="text-slate-500 block text-[10px]">{log.metricLabel}</span>
+                    <span className="text-cyan-300 font-bold text-sm">
+                      {log.metric}
+                    </span>{" "}
+                    <span className="text-slate-500 block text-[10px]">
+                      {log.metricLabel}
+                    </span>
                   </div>
                 </div>
 
