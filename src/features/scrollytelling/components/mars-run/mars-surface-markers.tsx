@@ -1,7 +1,8 @@
 "use client";
 
-import { MutableRefObject } from "react";
+import { MutableRefObject, RefObject } from "react";
 
+// ----- TYPES -----
 type TMarsMarker = {
   id: string;
   step: string;
@@ -14,6 +15,8 @@ type TMarsMarker = {
   positionClasses: string;
 };
 
+
+// ----- MOCK-DATA -----
 const MARS_MARKERS: TMarsMarker[] = [
   {
     id: "olympus",
@@ -59,7 +62,7 @@ const MARS_MARKERS: TMarsMarker[] = [
 ];
 
 type TMarsSurfaceMarkersProps = {
-  surfaceMarkersRef: MutableRefObject<(HTMLDivElement | null)[]>;
+  surfaceMarkersRef: RefObject<(HTMLDivElement | null)[]>;
 };
 
 export function MarsSurfaceMarkers({

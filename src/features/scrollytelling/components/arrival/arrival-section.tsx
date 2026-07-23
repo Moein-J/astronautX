@@ -1,21 +1,22 @@
-import React from "react";
-import { ArrivalParallax } from "./arrival-parallax";
+import { ArrivalParallax } from './arrival-parallax'
 
+// ----- TYPES -----
 type TArrivalSectionProps = {
-  id?: string;
-};
+  id?: string
+}
 
-export function ArrivalSection({ id = "arrival" }: TArrivalSectionProps) {
-  const content = {
-    title: "Welcome to Station Cosmos Outpost 07",
-    subtitle:
-      "Your orbital voyage has successfully reached destination coordinates. Take command of the interactive Station-OS terminal below to run live diagnostics, adjust deflector shields, or trigger automated station docking.",
-    ctaPrimary: "Station Command Terminal",
-    ctaSecondary: "View Source Code",
-  };
+// ----- MOCK-DATA -----
+const content = {
+  title: 'Welcome to Station Cosmos Outpost 07',
+  subtitle:
+    'Your orbital voyage has successfully reached destination coordinates. Take command of the interactive Station-OS terminal below to run live diagnostics, adjust deflector shields, or trigger automated station docking.',
+  ctaPrimary: 'Station Command Terminal',
+  ctaSecondary: 'View Source Code',
+}
 
+export function ArrivalSection({ id = 'arrival' }: TArrivalSectionProps) {
   return (
-    <section id={id} className="relative w-full min-h-screen bg-slate-950">
+    <section id={id} className="relative min-h-screen w-full bg-transparent">
       <ArrivalParallax
         title={content.title}
         subtitle={content.subtitle}
@@ -23,5 +24,5 @@ export function ArrivalSection({ id = "arrival" }: TArrivalSectionProps) {
         ctaSecondary={content.ctaSecondary}
       />
     </section>
-  );
+  )
 }

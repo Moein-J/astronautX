@@ -21,10 +21,8 @@ type TObservatoryCardItemProps = {
   setCardRef: (el: HTMLDivElement | null) => void
 }
 
-export function ObservatoryCardItem({
-  item,
-  setCardRef,
-}: TObservatoryCardItemProps) {
+export function ObservatoryCardItem(props: TObservatoryCardItemProps) {
+  const { item, setCardRef } = props
   return (
     <div
       ref={setCardRef}

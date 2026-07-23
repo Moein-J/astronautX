@@ -1,20 +1,20 @@
-"use client";
+'use client'
 
-import React, { RefObject } from "react";
-import { ChevronDown } from "lucide-react";
+import { RefObject } from 'react'
+import { ChevronDown } from 'lucide-react'
 
 type THeroScrollHintProps = {
-  scrollHintRef: RefObject<HTMLDivElement | null>;
-};
+  scrollHintRef: RefObject<HTMLDivElement | null>
+}
 
 export function HeroScrollHint({ scrollHintRef }: THeroScrollHintProps) {
   return (
     <div
       ref={scrollHintRef}
-      className="relative z-20 flex flex-col items-center justify-center text-center gap-1 text-slate-400 font-mono text-[11px] md:text-xs tracking-widest uppercase animate-bounce mb-1"
+      className="relative z-20 mb-1 flex animate-bounce flex-col items-center justify-center gap-1 text-center font-mono text-[11px] tracking-widest text-slate-400 uppercase md:text-xs"
     >
       <span>SCROLL TO LAUNCH</span>
-      <ChevronDown className="w-4 h-4 text-cyan-400" />
+      <ChevronDown className="h-4 w-4 text-cyan-400" />
     </div>
-  );
+  )
 }

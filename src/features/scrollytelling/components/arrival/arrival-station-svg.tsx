@@ -1,29 +1,23 @@
-"use client";
+'use client'
 
-import React, { RefObject } from "react";
+import { RefObject } from 'react'
 
 type TArrivalStationSvgProps = {
-  stationRef: RefObject<HTMLDivElement | null>;
-};
+  stationRef: RefObject<HTMLDivElement | null>
+}
 
 export function ArrivalStationSvg({ stationRef }: TArrivalStationSvgProps) {
   return (
     <div
       ref={stationRef}
-      className="relative max-w-xl mx-auto mb-6 sm:mb-12 pointer-events-none flex justify-center"
+      className="pointer-events-none relative mx-auto mb-6 flex max-w-xl justify-center sm:mb-12"
     >
       <svg
         viewBox="0 0 400 200"
-        className="w-full h-auto max-w-64 sm:max-w-md drop-shadow-[0_0_50px_rgba(34,211,238,0.35)]"
+        className="h-auto w-full max-w-64 drop-shadow-[0_0_50px_rgba(34,211,238,0.35)] sm:max-w-md"
       >
         <defs>
-          <linearGradient
-            id="stationMetal"
-            x1="0%"
-            y1="0%"
-            x2="100%"
-            y2="100%"
-          >
+          <linearGradient id="stationMetal" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#38bdf8" />
             <stop offset="50%" stopColor="#1e293b" />
             <stop offset="100%" stopColor="#0f172a" />
@@ -149,5 +143,5 @@ export function ArrivalStationSvg({ stationRef }: TArrivalStationSvgProps) {
         />
       </svg>
     </div>
-  );
+  )
 }

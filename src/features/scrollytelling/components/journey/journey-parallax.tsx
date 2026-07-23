@@ -1,17 +1,18 @@
-"use client";
+'use client'
 
-import React from "react";
-import { useJourneyParallax } from "../../hooks/use-journey-parallax";
-import { JourneyBackgroundPlanets } from "./journey-background-planets";
-import { JourneyHeader } from "./journey-header";
-import { JourneyTrajectoryBeam } from "./journey-trajectory-beam";
-import { JourneyCardItem, TNarrativeLog } from "./journey-card-item";
+import { useJourneyParallax } from '../../hooks/use-journey-parallax'
+import { JourneyBackgroundPlanets } from './journey-background-planets'
+import { JourneyHeader } from './journey-header'
+import { JourneyTrajectoryBeam } from './journey-trajectory-beam'
+import { JourneyCardItem, TNarrativeLog } from './journey-card-item'
 
+// ----- TYPES -----
 type TJourneyParallaxProps = {
-  logs: TNarrativeLog[];
-};
+  logs: TNarrativeLog[]
+}
 
 export function JourneyParallax({ logs }: TJourneyParallaxProps) {
+  // ----- HOOKS -----
   const {
     sectionRef,
     planetRef1,
@@ -20,12 +21,12 @@ export function JourneyParallax({ logs }: TJourneyParallaxProps) {
     debrisRef,
     progressBeamRef,
     logCardsRef,
-  } = useJourneyParallax();
+  } = useJourneyParallax()
 
   return (
     <div
       ref={sectionRef}
-      className="relative w-full py-16 sm:py-24 md:py-36 px-4 md:px-6 overflow-hidden"
+      className="relative w-full overflow-hidden px-4 py-16 sm:py-24 md:px-6 md:py-36"
     >
       {/* Background Planets & Nebula Visuals */}
       <JourneyBackgroundPlanets
@@ -36,7 +37,7 @@ export function JourneyParallax({ logs }: TJourneyParallaxProps) {
       />
 
       {/* Main Content Container */}
-      <div className="relative z-20 max-w-5xl mx-auto space-y-10 sm:space-y-16 md:space-y-28">
+      <div className="relative z-20 mx-auto max-w-5xl space-y-10 sm:space-y-16 md:space-y-28">
         {/* Section Header */}
         <JourneyHeader />
 
@@ -45,14 +46,14 @@ export function JourneyParallax({ logs }: TJourneyParallaxProps) {
           {/* Central Trajectory Progress Line */}
           <JourneyTrajectoryBeam progressBeamRef={progressBeamRef} />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-12">
+          <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 md:gap-12">
             {logs.map((log, index) => (
               <JourneyCardItem
                 key={log.id}
                 log={log}
                 index={index}
                 setCardRef={(el) => {
-                  logCardsRef.current[index] = el;
+                  logCardsRef.current[index] = el
                 }}
               />
             ))}
@@ -60,5 +61,5 @@ export function JourneyParallax({ logs }: TJourneyParallaxProps) {
         </div>
       </div>
     </div>
-  );
+  )
 }

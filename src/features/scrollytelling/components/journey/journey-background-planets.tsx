@@ -1,30 +1,30 @@
-"use client";
+'use client'
 
-import React, { RefObject } from "react";
+import { RefObject } from 'react'
 
+// ----- TYPES -----
 type TJourneyBackgroundPlanetsProps = {
-  planetRef1: RefObject<HTMLDivElement | null>;
-  planetRef2: RefObject<HTMLDivElement | null>;
-  nebulaRef: RefObject<HTMLDivElement | null>;
-  debrisRef: RefObject<HTMLDivElement | null>;
-};
+  planetRef1: RefObject<HTMLDivElement | null>
+  planetRef2: RefObject<HTMLDivElement | null>
+  nebulaRef: RefObject<HTMLDivElement | null>
+  debrisRef: RefObject<HTMLDivElement | null>
+}
 
-export function JourneyBackgroundPlanets({
-  planetRef1,
-  planetRef2,
-  nebulaRef,
-  debrisRef,
-}: TJourneyBackgroundPlanetsProps) {
+export function JourneyBackgroundPlanets(
+  props: TJourneyBackgroundPlanetsProps
+) {
+  const { debrisRef, nebulaRef, planetRef1, planetRef2 } = props
+
   return (
     <>
       {/* Background Parallax Planet 1 (Purple Gas Giant with Glowing Rings) */}
       <div
         ref={planetRef1}
-        className="absolute -top-10 -right-12 sm:-right-20 w-48 sm:w-64 md:w-112.5 h-48 sm:h-64 md:h-112.5 pointer-events-none z-0 opacity-80"
+        className="pointer-events-none absolute -top-10 -right-12 z-0 h-48 w-48 opacity-80 sm:-right-20 sm:h-64 sm:w-64 md:h-112.5 md:w-112.5"
       >
         <svg
           viewBox="0 0 200 200"
-          className="w-full h-full drop-shadow-[0_0_50px_rgba(168,85,247,0.35)]"
+          className="h-full w-full drop-shadow-[0_0_50px_rgba(168,85,247,0.35)]"
         >
           <defs>
             <radialGradient id="planet1Grad" cx="30%" cy="30%" r="70%">
@@ -62,11 +62,11 @@ export function JourneyBackgroundPlanets({
       {/* Background Parallax Planet 2 (Cyan Cratered Moon) */}
       <div
         ref={planetRef2}
-        className="absolute top-1/2 -left-16 sm:-left-24 w-40 sm:w-56 md:w-96 h-40 sm:h-56 md:h-96 pointer-events-none z-0 opacity-70"
+        className="pointer-events-none absolute top-1/2 -left-16 z-0 h-40 w-40 opacity-70 sm:-left-24 sm:h-56 sm:w-56 md:h-96 md:w-96"
       >
         <svg
           viewBox="0 0 200 200"
-          className="w-full h-full drop-shadow-[0_0_40px_rgba(34,211,238,0.25)]"
+          className="h-full w-full drop-shadow-[0_0_40px_rgba(34,211,238,0.25)]"
         >
           <radialGradient id="planet2Grad" cx="30%" cy="30%" r="70%">
             <stop offset="0%" stopColor="#38bdf8" />
@@ -83,18 +83,18 @@ export function JourneyBackgroundPlanets({
       {/* Cosmic Nebula Cloud */}
       <div
         ref={nebulaRef}
-        className="absolute top-1/4 left-1/3 w-80 sm:w-112.5 md:w-175 h-80 sm:h-112.5 md:h-175 rounded-full bg-radial from-indigo-600/20 via-cyan-500/15 to-transparent blur-3xl pointer-events-none z-0"
+        className="pointer-events-none absolute top-1/4 left-1/3 z-0 h-80 w-80 rounded-full bg-radial from-indigo-600/20 via-cyan-500/15 to-transparent blur-3xl sm:h-112.5 sm:w-112.5 md:h-175 md:w-175"
       />
 
       {/* Foreground Stardust Particles Layer */}
       <div
         ref={debrisRef}
-        className="absolute inset-0 pointer-events-none z-10"
+        className="pointer-events-none absolute inset-0 z-10"
       >
-        <div className="absolute top-1/5 right-1/4 w-2.5 h-2.5 rounded-full bg-cyan-300 opacity-70 shadow-[0_0_10px_#22d3ee] animate-pulse" />
-        <div className="absolute top-2/3 right-1/3 w-3 h-3 rounded-full bg-purple-400 opacity-60 shadow-[0_0_12px_#a855f7]" />
-        <div className="absolute top-1/2 left-1/4 w-2 h-2 rounded-full bg-white opacity-90 shadow-[0_0_8px_#ffffff]" />
+        <div className="absolute top-1/5 right-1/4 h-2.5 w-2.5 animate-pulse rounded-full bg-cyan-300 opacity-70 shadow-[0_0_10px_#22d3ee]" />
+        <div className="absolute top-2/3 right-1/3 h-3 w-3 rounded-full bg-purple-400 opacity-60 shadow-[0_0_12px_#a855f7]" />
+        <div className="absolute top-1/2 left-1/4 h-2 w-2 rounded-full bg-white opacity-90 shadow-[0_0_8px_#ffffff]" />
       </div>
     </>
-  );
+  )
 }
