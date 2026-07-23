@@ -20,8 +20,13 @@ export function ThrusterCursor({ className }: TThrusterCursorProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
-    // Only enable on fine pointer devices (desktop)
-    if (window.matchMedia("(pointer: coarse)").matches) return;
+    // Disable completely on mobile touch devices
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(max-width: 767px), (pointer: coarse)").matches
+    ) {
+      return;
+    }
 
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -114,7 +119,7 @@ export function ThrusterCursor({ className }: TThrusterCursorProps) {
   return (
     <canvas
       ref={canvasRef}
-      className={`fixed inset-0 pointer-events-none z-50 ${className || ""}`}
+      className={`fixed inset-0 pointer-events-none z-50 hidden md:block ${className || ""}`}
     />
   );
 }

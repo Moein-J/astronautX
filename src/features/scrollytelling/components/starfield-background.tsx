@@ -21,6 +21,14 @@ export function StarfieldBackground({ className }: TStarfieldBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
+    // Disable background canvas execution on mobile touch screens for maximum performance & battery life
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(max-width: 767px), (pointer: coarse)").matches
+    ) {
+      return;
+    }
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -39,8 +47,7 @@ export function StarfieldBackground({ className }: TStarfieldBackgroundProps) {
 
     window.addEventListener("resize", handleResize);
 
-    // Create rich starfield density
-    const count = Math.min(Math.floor((width * height) / 2000), 450);
+    const count = Math.min(Math.floor((width * height) / 2000), 400);
     const stars: Star[] = [];
     const colors = [
       "#ffffff",
@@ -137,7 +144,7 @@ export function StarfieldBackground({ className }: TStarfieldBackgroundProps) {
         ctx.globalAlpha = opacity;
 
         if (star.size > 1.4) {
-          ctx.shadowBlur = 8;
+          ctx.shadowBlur = 6;
           ctx.shadowColor = star.color;
         }
 
@@ -161,7 +168,7 @@ export function StarfieldBackground({ className }: TStarfieldBackgroundProps) {
   return (
     <canvas
       ref={canvasRef}
-      className={`fixed inset-0 pointer-events-none z-0 ${className || ""}`}
+      className={`fixed inset-0 pointer-events-none z-0 hidden md:block ${className || ""}`}
     />
   );
 }
