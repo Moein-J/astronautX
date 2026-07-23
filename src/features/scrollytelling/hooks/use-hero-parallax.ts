@@ -30,9 +30,8 @@ export function useHeroParallax() {
 
     const mm = gsap.matchMedia();
 
-    // Desktop Animation (Pinned 3D Zoom, Perspective Drift & Smooth Scroll Text Callouts)
+    // Desktop Animation (Fast 0.5s Scrub, Smooth Touchpad Tracking & Linear Ease)
     mm.add("(min-width: 768px)", () => {
-      // Dynamic vertical shift calculated relative to device height
       const screenH = typeof window !== "undefined" ? window.innerHeight : 800;
       const maxY = Math.min(screenH * 0.18, 140);
       const targetScale = screenH < 750 ? 1.35 : 1.75;
@@ -42,7 +41,7 @@ export function useHeroParallax() {
           trigger: container,
           start: "top top",
           end: "+=150%",
-          scrub: 1.2,
+          scrub: 0.5,
           pin: true,
           anticipatePin: 1,
         },
@@ -51,11 +50,11 @@ export function useHeroParallax() {
       const [c1, c2, c3] = calloutsRef.current;
 
       // Ensure callouts start completely hidden at scroll position 0 on desktop
-      if (c1) tl.set(c1, { opacity: 0 }, 0);
-      if (c2) tl.set(c2, { opacity: 0 }, 0);
-      if (c3) tl.set(c3, { opacity: 0 }, 0);
+      if (c1) tl.set(c1, { opacity: 0, scale: 0.95 }, 0);
+      if (c2) tl.set(c2, { opacity: 0, scale: 0.95 }, 0);
+      if (c3) tl.set(c3, { opacity: 0, scale: 0.95 }, 0);
 
-      // Hero main typography & buttons fade out
+      // Hero main typography & buttons fade out smoothly
       tl.to(
         heroContent,
         {
@@ -63,90 +62,79 @@ export function useHeroParallax() {
           y: -Math.min(screenH * 0.12, 90),
           scale: 0.9,
           duration: 0.35,
-          ease: "power2.inOut",
+          ease: "none",
         },
         0,
       );
 
       // Scroll hint fades out
       if (scrollHint) {
-        tl.to(scrollHint, { opacity: 0, y: 20, duration: 0.2 }, 0);
+        tl.to(scrollHint, { opacity: 0, y: 20, duration: 0.2, ease: "none" }, 0);
       }
 
       // Cosmic background ring scale
       if (starRing) {
         tl.to(
           starRing,
-          { scale: 2.8, rotate: 120, opacity: 0.15, duration: 1 },
+          { scale: 2.8, rotate: 120, opacity: 0.15, duration: 1, ease: "none" },
           0,
         );
       }
 
-      // Astronaut rig scaling & floating perspective movement with dynamic screen-height bounding
+      // Astronaut rig scaling & floating perspective movement (Clean 2D transform for 60fps touchpad smoothness)
       tl.to(
         astroWrapper,
         {
           scale: targetScale,
           y: -maxY,
           x: 15,
-          rotateZ: -10,
-          rotateY: 12,
+          rotateZ: -8,
           duration: 1,
-          ease: "sine.inOut",
+          ease: "none",
         },
         0.1,
       );
 
-      // Sequentially fade and slide text callouts with smooth power2 easing
+      // Sequentially fade callout cards with 1:1 linear scrub matching touchpad scroll
       if (c1) {
         tl.fromTo(
           c1,
-          { opacity: 0, x: -30, scale: 0.9 },
-          { opacity: 1, x: 0, scale: 1, duration: 0.2, ease: "power2.out" },
+          { opacity: 0, scale: 0.95 },
+          { opacity: 1, scale: 1, duration: 0.22, ease: "none" },
           0.18,
         );
         tl.to(
           c1,
-          { opacity: 0.3, scale: 0.95, duration: 0.15, ease: "power1.inOut" },
-          0.48,
-        );
-        tl.to(
-          c1,
-          { opacity: 0, scale: 0.9, duration: 0.15, ease: "power1.in" },
-          0.82,
+          { opacity: 0, scale: 0.95, duration: 0.22, ease: "none" },
+          0.72,
         );
       }
 
       if (c2) {
         tl.fromTo(
           c2,
-          { opacity: 0, x: 30, scale: 0.9 },
-          { opacity: 1, x: 0, scale: 1, duration: 0.2, ease: "power2.out" },
-          0.44,
+          { opacity: 0, scale: 0.95 },
+          { opacity: 1, scale: 1, duration: 0.22, ease: "none" },
+          0.42,
         );
         tl.to(
           c2,
-          { opacity: 0.3, scale: 0.95, duration: 0.15, ease: "power1.inOut" },
-          0.68,
-        );
-        tl.to(
-          c2,
-          { opacity: 0, scale: 0.9, duration: 0.15, ease: "power1.in" },
-          0.82,
+          { opacity: 0, scale: 0.95, duration: 0.22, ease: "none" },
+          0.8,
         );
       }
 
       if (c3) {
         tl.fromTo(
           c3,
-          { opacity: 0, y: 15, scale: 0.9 },
-          { opacity: 1, y: 0, scale: 1, duration: 0.2, ease: "power2.out" },
-          0.66,
+          { opacity: 0, scale: 0.95 },
+          { opacity: 1, scale: 1, duration: 0.22, ease: "none" },
+          0.62,
         );
         tl.to(
           c3,
-          { opacity: 0, scale: 0.9, duration: 0.15, ease: "power1.in" },
-          0.82,
+          { opacity: 0, scale: 0.95, duration: 0.2, ease: "none" },
+          0.85,
         );
       }
     });
