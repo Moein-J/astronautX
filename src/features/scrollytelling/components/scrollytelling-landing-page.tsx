@@ -1,4 +1,3 @@
-import React from "react";
 import { SmoothScrollProvider } from "@/shared/components/providers/smooth-scroll-provider";
 import { StarfieldBackground } from "./starfield-background";
 import { ThrusterCursor } from "./thruster-cursor";

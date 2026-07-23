@@ -1,27 +1,41 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 
 type TSmoothScrollContext = {
-  lenis: Lenis | null;
+  lenisRef: React.RefObject<Lenis | null>;
 };
 
-const SmoothScrollContext = createContext<TSmoothScrollContext>({ lenis: null });
+const SmoothScrollContext = createContext<TSmoothScrollContext | null>(null);
 
-export const useLenisScroll = () => useContext(SmoothScrollContext);
+export function useLenisScroll() {
+  const ctx = useContext(SmoothScrollContext);
+  if (!ctx) {
+    throw new Error("useLenisScroll must be used within a SmoothScrollProvider");
+  }
+  return ctx;
+}
 
 type TSmoothScrollProviderProps = {
   children: React.ReactNode;
 };
 
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
 export function SmoothScrollProvider({ children }: TSmoothScrollProviderProps) {
-  const [lenisInstance, setLenisInstance] = useState<Lenis | null>(null);
+  const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    // Browsers restore the previous scroll position on reload by default,
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+    window.scrollTo(0, 0);
 
     const lenis = new Lenis({
       duration: 1.2,
@@ -33,7 +47,9 @@ export function SmoothScrollProvider({ children }: TSmoothScrollProviderProps) {
       touchMultiplier: 2,
     });
 
-    setLenisInstance(lenis);
+    lenisRef.current = lenis;
+
+    lenis.scrollTo(0, { immediate: true });
 
     lenis.on("scroll", ScrollTrigger.update);
 
@@ -47,12 +63,12 @@ export function SmoothScrollProvider({ children }: TSmoothScrollProviderProps) {
     return () => {
       gsap.ticker.remove(updateLenis);
       lenis.destroy();
-      setLenisInstance(null);
+      lenisRef.current = null;
     };
   }, []);
 
   return (
-    <SmoothScrollContext.Provider value={{ lenis: lenisInstance }}>
+    <SmoothScrollContext.Provider value={{ lenisRef }}>
       {children}
     </SmoothScrollContext.Provider>
   );
