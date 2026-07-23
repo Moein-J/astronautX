@@ -7,10 +7,10 @@ type TArrivalSectionProps = {
 
 export function ArrivalSection({ id = "arrival" }: TArrivalSectionProps) {
   const content = {
-    title: "Welcome to Cosmos Station",
+    title: "Welcome to Station Cosmos Outpost 07",
     subtitle:
-      "Your orbital voyage has successfully reached destination coordinates. Take command of the interactive station terminal below to run live diagnostics or explore full mission telemetry.",
-    ctaPrimary: "Interact with Terminal",
+      "Your orbital voyage has successfully reached destination coordinates. Take command of the interactive Station-OS terminal below to run live diagnostics, adjust deflector shields, or trigger automated station docking.",
+    ctaPrimary: "Station Command Terminal",
     ctaSecondary: "View Source Code",
   };
 

@@ -17,44 +17,44 @@ type TTelemetryItem = {
 const TELEMETRY_CALLOUTS: TTelemetryItem[] = [
   {
     id: "thrusters",
-    step: "01 // MAIN THRUSTERS",
-    badge: "100% PWR",
+    step: "01 // HYPERGOLIC IGNITION",
+    badge: "2.45G THRUST",
     badgePulse: true,
     description:
-      "Secondary booster stage engaged. Pitch angle 45° vertical takeoff.",
+      "Primary booster stage engaged. Pitch angle 45° vertical ascent through troposphere.",
     borderColor: "border-cyan-500/40 hover:border-cyan-400 shadow-cyan-950/60",
     badgeBg: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
     textColor: "text-cyan-400",
     positionClasses:
-      "-top-4 left-1 sm:left-6 md:-left-8 lg:-left-20 max-w-[155px] sm:max-w-[220px] md:max-w-[260px]",
+      "-top-4 left-1 sm:left-6 md:-left-8 lg:-left-20 max-w-[160px] sm:max-w-[220px] md:max-w-[260px]",
   },
   {
     id: "maxq",
-    step: "02 // MAX Q ALTITUDE",
+    step: "02 // KÁRMÁN LINE CROSSING",
     badge: "ALT 85K FT",
     badgePulse: false,
     description:
-      "Maximum dynamic pressure passed. Hull integrity 100% nominal.",
+      "Maximum dynamic pressure passed. Ionization shields active. Hull integrity 100% nominal.",
     borderColor:
       "border-purple-500/40 hover:border-purple-400 shadow-purple-950/60",
     badgeBg: "bg-purple-500/20 text-purple-300 border-purple-500/30",
     textColor: "text-purple-300",
     positionClasses:
-      "top-1/4 right-1 sm:right-6 md:-right-8 lg:-right-20 max-w-[155px] sm:max-w-[220px] md:max-w-[260px]",
+      "top-1/4 right-1 sm:right-6 md:-right-8 lg:-right-20 max-w-[160px] sm:max-w-[220px] md:max-w-[260px]",
   },
   {
     id: "orbit",
     step: "03 // ORBITAL INSERTION",
-    badge: "27.5K KM/H",
+    badge: "27,650 KM/H",
     badgePulse: false,
     description:
-      "Zero-G trajectory locked. Trans-orbital flight path established.",
+      "Zero-G momentum locked. Trans-orbital flight path to Cosmos Outpost established.",
     borderColor:
       "border-indigo-500/40 hover:border-indigo-400 shadow-indigo-950/60",
     badgeBg: "bg-indigo-500/20 text-indigo-300 border-indigo-500/30",
     textColor: "text-indigo-300",
     positionClasses:
-      "-bottom-6 left-1/2 -translate-x-1/2 max-w-[180px] sm:max-w-[240px] md:max-w-[300px] text-center",
+      "-bottom-6 left-1/2 -translate-x-1/2 max-w-[190px] sm:max-w-[240px] md:max-w-[300px] text-center",
   },
 ];
 
