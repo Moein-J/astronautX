@@ -1,16 +1,16 @@
-import { SmoothScrollProvider } from "@/shared/components/providers/smooth-scroll-provider";
-import { StarfieldBackground } from "./starfield-background";
-import { ThrusterCursor } from "./thruster-cursor";
-import { ScrollProgressBar } from "./scroll-progress-bar";
-import { HeroSection } from "./hero";
-import { JourneySection } from "./journey";
-import { ArrivalSection } from "./arrival";
-import { SiteFooter } from "./site-footer";
+import { SmoothScrollProvider } from '@/shared/components/providers/smooth-scroll-provider'
+import { StarfieldBackground } from './starfield-background'
+import { ThrusterCursor } from './thruster-cursor'
+import { ScrollProgressBar } from './scroll-progress-bar'
+import { HeroSection } from './hero'
+import { JourneySection } from './journey'
+import { ArrivalSection } from './arrival'
+import { SiteFooter } from './site-footer'
 
 export function ScrollytellingLandingPage() {
   return (
     <SmoothScrollProvider>
-      <div className="relative min-h-screen bg-slate-950 text-slate-100 selection:bg-cyan-500 selection:text-slate-950 font-sans antialiased overflow-x-hidden">
+      <div className="relative min-h-screen overflow-x-hidden bg-slate-950 font-sans text-slate-100 antialiased selection:bg-cyan-500 selection:text-slate-950">
         {/* Global Ambient Interactive Canvas Background */}
         <StarfieldBackground />
 
@@ -19,7 +19,6 @@ export function ScrollytellingLandingPage() {
 
         {/* Top Scroll HUD Progress Bar */}
         <ScrollProgressBar />
-
 
         {/* Main Scrollytelling Narrative Sections */}
         <main className="relative z-10 flex flex-col">
@@ -32,5 +31,5 @@ export function ScrollytellingLandingPage() {
         <SiteFooter />
       </div>
     </SmoothScrollProvider>
-  );
+  )
 }
