@@ -1,16 +1,15 @@
-"use client";
+'use client'
 
-import React from "react";
-import { motion } from "motion/react";
+import { motion } from 'motion/react'
 
 type TAstronautRigProps = {
-  className?: string;
-  isFloating?: boolean;
-  scale?: number;
-};
+  className?: string
+  isFloating?: boolean
+  scale?: number
+}
 
 export function AstronautRig({
-  className = "",
+  className = '',
   isFloating = true,
   scale = 1,
 }: TAstronautRigProps) {
@@ -29,22 +28,35 @@ export function AstronautRig({
       transition={{
         duration: 7.5,
         repeat: Infinity,
-        ease: "easeInOut",
+        ease: 'easeInOut',
       }}
     >
       {/* Outer Ethereal Cosmic Aura */}
-      <div className="absolute inset-0 rounded-full bg-linear-to-r from-cyan-500/30 via-purple-500/20 to-indigo-500/30 blur-3xl transform scale-150 -z-10 animate-pulse" />
-      
+      <div className="absolute inset-0 -z-10 scale-150 transform animate-pulse rounded-full bg-linear-to-r from-cyan-500/30 via-purple-500/20 to-indigo-500/30 blur-3xl" />
+
       {/* Floating Sparkle Particles around Helmet */}
       <motion.div
-        className="absolute -top-4 left-1/4 w-2 h-2 rounded-full bg-cyan-300 shadow-[0_0_10px_#22d3ee]"
-        animate={{ y: [0, -10, 0], opacity: [0.3, 1, 0.3], scale: [0.8, 1.3, 0.8] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -top-4 left-1/4 h-2 w-2 rounded-full bg-cyan-300 shadow-[0_0_10px_#22d3ee]"
+        animate={{
+          y: [0, -10, 0],
+          opacity: [0.3, 1, 0.3],
+          scale: [0.8, 1.3, 0.8],
+        }}
+        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
       />
       <motion.div
-        className="absolute top-1/3 -right-6 w-2.5 h-2.5 rounded-full bg-purple-300 shadow-[0_0_12px_#c084fc]"
-        animate={{ y: [0, 12, 0], opacity: [0.4, 0.9, 0.4], scale: [1, 0.7, 1] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+        className="absolute top-1/3 -right-6 h-2.5 w-2.5 rounded-full bg-purple-300 shadow-[0_0_12px_#c084fc]"
+        animate={{
+          y: [0, 12, 0],
+          opacity: [0.4, 0.9, 0.4],
+          scale: [1, 0.7, 1],
+        }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          ease: 'easeInOut',
+          delay: 0.8,
+        }}
       />
 
       {/* Vector Astronaut SVG */}
@@ -54,7 +66,7 @@ export function AstronautRig({
         viewBox="0 0 280 360"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-auto drop-shadow-[0_20px_45px_rgba(6,182,212,0.4)]"
+        className="h-auto w-full drop-shadow-[0_20px_45px_rgba(6,182,212,0.4)]"
       >
         <defs>
           {/* Visor Gradient */}
@@ -119,13 +131,21 @@ export function AstronautRig({
           d="M 75 250 Q 80 300 85 325 Q 75 300 75 250 Z"
           fill="url(#thrusterFire)"
           animate={{ scaleY: [0.85, 1.25, 0.9], opacity: [0.7, 1, 0.8] }}
-          transition={{ duration: 0.35, repeat: Infinity, repeatType: "reverse" }}
+          transition={{
+            duration: 0.35,
+            repeat: Infinity,
+            repeatType: 'reverse',
+          }}
         />
         <motion.path
           d="M 195 250 Q 200 300 205 325 Q 195 300 195 250 Z"
           fill="url(#thrusterFire)"
           animate={{ scaleY: [1.1, 0.8, 1.2], opacity: [0.8, 0.6, 0.95] }}
-          transition={{ duration: 0.3, repeat: Infinity, repeatType: "reverse" }}
+          transition={{
+            duration: 0.3,
+            repeat: Infinity,
+            repeatType: 'reverse',
+          }}
         />
 
         {/* Legs */}
@@ -171,7 +191,13 @@ export function AstronautRig({
           strokeWidth="2"
         />
         {/* Console LEDs */}
-        <circle cx="123" cy="150" r="4" fill="#ef4444" className="animate-ping" />
+        <circle
+          cx="123"
+          cy="150"
+          r="4"
+          fill="#ef4444"
+          className="animate-ping"
+        />
         <circle cx="140" cy="150" r="4" fill="#22c55e" />
         <circle cx="157" cy="150" r="4" fill="#38bdf8" />
         {/* Telemetry Gauge Bar */}
@@ -237,5 +263,5 @@ export function AstronautRig({
         <circle cx="196" cy="75" r="2" fill="#ffffff" />
       </svg>
     </motion.div>
-  );
+  )
 }
