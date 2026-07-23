@@ -38,7 +38,7 @@ body {
   animation: spinSlow 20s linear infinite;
 }
 
-/* Custom Scrollbar styling */
+/* Custom Scrollbar styling for desktop */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -56,8 +56,23 @@ body {
   background: #0284c7;
 }
 
+/* Hide entire browser scrollbar on mobile devices (<768px or touch pointer) */
+@media (max-width: 767px), (pointer: coarse) {
+  ::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+  html,
+  body {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+  }
+}
+
 /* Lenis smooth scroll overrides */
-html.lenis, html.lenis body {
+html.lenis,
+html.lenis body {
   height: auto;
 }
 

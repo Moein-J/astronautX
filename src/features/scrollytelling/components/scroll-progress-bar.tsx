@@ -11,8 +11,17 @@ export function ScrollProgressBar({ className = "" }: TScrollProgressBarProps) {
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
+    // Disable scroll progress calculations completely on mobile touch screens
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(max-width: 767px), (pointer: coarse)").matches
+    ) {
+      return;
+    }
+
     const handleScroll = () => {
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const totalHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
       if (totalHeight > 0) {
         const progress = (window.scrollY / totalHeight) * 100;
         setScrollProgress(Math.min(100, Math.max(0, progress)));
@@ -24,7 +33,9 @@ export function ScrollProgressBar({ className = "" }: TScrollProgressBarProps) {
   }, []);
 
   return (
-    <div className={`fixed top-0 left-0 right-0 z-50 ${className}`}>
+    <div
+      className={`fixed top-0 left-0 right-0 z-50 hidden md:block ${className}`}
+    >
       {/* Glow bar */}
       <div
         className="h-1 bg-linear-to-r from-cyan-500 via-indigo-500 to-purple-500 shadow-[0_0_12px_rgba(34,211,238,0.8)] transition-all duration-150 ease-out"
