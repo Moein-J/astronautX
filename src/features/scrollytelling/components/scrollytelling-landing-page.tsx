@@ -15,12 +15,10 @@ export function ScrollytellingLandingPage() {
       <div className="relative min-h-screen overflow-x-hidden bg-slate-950 font-sans text-slate-100 antialiased selection:bg-cyan-500 selection:text-slate-950">
         {/* Global Ambient Interactive Canvas Background */}
 
-        <div className="max-sm:hidden">
-          <StarfieldBackground />
+        <StarfieldBackground />
 
-          {/* Custom Thruster Particle Cursor */}
-          <ThrusterCursor />
-        </div>
+        {/* Custom Thruster Particle Cursor */}
+        <ThrusterCursor />
 
         {/* Top Scroll HUD Progress Bar */}
         <ScrollProgressBar />

@@ -45,7 +45,7 @@ export function useHeroParallax() {
 
       const [c1, c2, c3] = calloutsRef.current;
 
-      // Ensure callouts start completely hidden at scroll position 0
+      // Ensure callouts start completely hidden at scroll position 0 on desktop
       if (c1) tl.set(c1, { opacity: 0 }, 0);
       if (c2) tl.set(c2, { opacity: 0 }, 0);
       if (c3) tl.set(c3, { opacity: 0 }, 0);
@@ -144,112 +144,15 @@ export function useHeroParallax() {
       }
     });
 
-    // Mobile Animation (Pinned smooth 3D Zoom, perspective drift & callouts)
+    // Mobile Layout (NO PINNING: Clean, unpinned responsive layout for 100% mobile stability)
     mm.add("(max-width: 767px)", () => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: container,
-          start: "top top",
-          end: "+=100%",
-          scrub: 0.8,
-          pin: true,
-          anticipatePin: 1,
-        },
+      gsap.set(heroContent, { opacity: 1, y: 0, scale: 1 });
+      gsap.set(astroWrapper, { opacity: 1, y: 0, scale: 1, rotateZ: 0 });
+
+      const validCallouts = calloutsRef.current.filter(Boolean);
+      validCallouts.forEach((card) => {
+        if (card) gsap.set(card, { opacity: 1, y: 0, scale: 1, x: 0 });
       });
-
-      const [c1, c2, c3] = calloutsRef.current;
-      if (c1) tl.set(c1, { opacity: 0 }, 0);
-      if (c2) tl.set(c2, { opacity: 0 }, 0);
-      if (c3) tl.set(c3, { opacity: 0 }, 0);
-
-      // Hero typography & CTA buttons fade out
-      tl.to(
-        heroContent,
-        {
-          opacity: 0,
-          y: -60,
-          scale: 0.92,
-          duration: 0.35,
-          ease: "power2.inOut",
-        },
-        0,
-      );
-
-      tl.to(scrollHint, { opacity: 0, y: 20, duration: 0.2 }, 0);
-
-      if (starRing) {
-        tl.to(
-          starRing,
-          { scale: 2.2, rotate: 60, opacity: 0.2, duration: 1 },
-          0,
-        );
-      }
-
-      // Astronaut moves up smoothly on mobile
-      tl.to(
-        astroWrapper,
-        {
-          scale: 1.35,
-          y: -100,
-          rotateZ: -6,
-          duration: 1,
-          ease: "sine.inOut",
-        },
-        0.1,
-      );
-
-      // Callouts reveal sequentially on mobile
-      if (c1) {
-        tl.fromTo(
-          c1,
-          { opacity: 0, y: 20, scale: 0.9 },
-          { opacity: 1, y: 0, scale: 1, duration: 0.2, ease: "power2.out" },
-          0.2,
-        );
-        tl.to(
-          c1,
-          { opacity: 0.3, scale: 0.95, duration: 0.15, ease: "power1.inOut" },
-          0.48,
-        );
-        tl.to(
-          c1,
-          { opacity: 0, duration: 0.15, ease: "power1.in" },
-          0.82,
-        );
-      }
-
-      if (c2) {
-        tl.fromTo(
-          c2,
-          { opacity: 0, y: 20, scale: 0.9 },
-          { opacity: 1, y: 0, scale: 1, duration: 0.2, ease: "power2.out" },
-          0.44,
-        );
-        tl.to(
-          c2,
-          { opacity: 0.3, scale: 0.95, duration: 0.15, ease: "power1.inOut" },
-          0.68,
-        );
-        tl.to(
-          c2,
-          { opacity: 0, duration: 0.15, ease: "power1.in" },
-          0.82,
-        );
-      }
-
-      if (c3) {
-        tl.fromTo(
-          c3,
-          { opacity: 0, y: 20, scale: 0.9 },
-          { opacity: 1, y: 0, scale: 1, duration: 0.2, ease: "power2.out" },
-          0.66,
-        );
-        tl.to(
-          c3,
-          { opacity: 0, duration: 0.15, ease: "power1.in" },
-          0.82,
-        );
-      }
     });
 
     return () => {

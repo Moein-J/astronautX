@@ -117,79 +117,25 @@ export function useMarsRunParallax() {
       }
     });
 
-    // Mobile Pinned Mars Orbital Walk Timeline
+    // Mobile Unpinned Layout (NO PINNING: Ambient rotation & static card stack for mobile stability)
     mm.add("(max-width: 767px)", () => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: container,
-          start: "top top",
-          end: "+=110%",
-          scrub: 0.8,
-          pin: true,
-          anticipatePin: 1,
-        },
+      // Ambient slow rotation of Mars on mobile
+      const anim = gsap.to(marsPlanet, {
+        rotate: -360,
+        duration: 45,
+        repeat: -1,
+        ease: "none",
       });
 
-      tl.to(
-        astroOrbit,
-        {
-          rotate: 360,
-          ease: "none",
-          duration: 1,
-        },
-        0,
-      );
+      // Ensure markers remain visible in mobile card stack
+      const validMarkers = surfaceMarkersRef.current.filter(Boolean);
+      validMarkers.forEach((marker) => {
+        if (marker) gsap.set(marker, { opacity: 1, y: 0, scale: 1 });
+      });
 
-      tl.to(
-        marsPlanet,
-        {
-          rotate: -140,
-          ease: "none",
-          duration: 1,
-        },
-        0,
-      );
-
-      tl.to(
-        astroRunner,
-        {
-          y: -4,
-          repeat: 7,
-          yoyo: true,
-          ease: "power1.inOut",
-          duration: 0.14,
-        },
-        0,
-      );
-
-      const [m1, m2, m3] = surfaceMarkersRef.current;
-      if (m1) {
-        tl.fromTo(
-          m1,
-          { opacity: 0, y: 15 },
-          { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" },
-          0.2,
-        );
-        tl.to(m1, { opacity: 0, duration: 0.15 }, 0.8);
-      }
-      if (m2) {
-        tl.fromTo(
-          m2,
-          { opacity: 0, y: 15 },
-          { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" },
-          0.45,
-        );
-        tl.to(m2, { opacity: 0, duration: 0.15 }, 0.8);
-      }
-      if (m3) {
-        tl.fromTo(
-          m3,
-          { opacity: 0, y: 15 },
-          { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" },
-          0.7,
-        );
-        tl.to(m3, { opacity: 0, duration: 0.15 }, 0.8);
-      }
+      return () => {
+        anim.kill();
+      };
     });
 
     return () => {

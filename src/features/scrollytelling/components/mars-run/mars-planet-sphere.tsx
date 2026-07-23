@@ -1,23 +1,23 @@
-'use client'
+"use client";
 
-import { RefObject } from 'react'
+import React, { RefObject } from "react";
 
 type TMarsPlanetSphereProps = {
-  marsPlanetRef: RefObject<HTMLDivElement | null>
-}
+  marsPlanetRef: RefObject<HTMLDivElement | null>;
+};
 
 export function MarsPlanetSphere({ marsPlanetRef }: TMarsPlanetSphereProps) {
   return (
-    <div className="pointer-events-none relative flex items-center justify-center">
+    <div className="relative flex items-center justify-center pointer-events-none">
       {/* Outer Atmospheric Red Glow Ring */}
-      <div className="absolute h-[340px] w-[340px] rounded-full bg-radial from-red-600/30 via-orange-600/15 to-transparent blur-3xl sm:h-[480px] sm:w-[480px] md:h-[620px] md:w-[620px]" />
+      <div className="absolute w-64 h-64 sm:w-80 sm:h-80 md:w-112 md:h-112 lg:w-140 lg:h-140 rounded-full bg-radial from-red-600/30 via-orange-600/15 to-transparent blur-2xl" />
 
       {/* Rotating Mars Circle */}
       <div
         ref={marsPlanetRef}
-        className="relative h-[300px] w-[300px] overflow-hidden rounded-full border-2 border-red-500/40 shadow-[0_0_80px_rgba(239,68,68,0.45)] sm:h-[420px] sm:w-[420px] md:h-[540px] md:w-[540px]"
+        className="relative w-56 h-56 sm:w-72 sm:h-72 md:w-96 md:h-96 lg:w-[480px] lg:h-[480px] rounded-full shadow-[0_0_60px_rgba(239,68,68,0.4)] border-2 border-red-500/40 overflow-hidden"
       >
-        <svg viewBox="0 0 400 400" className="h-full w-full">
+        <svg viewBox="0 0 400 400" className="w-full h-full">
           <defs>
             {/* Mars Red Surface Radial Gradient */}
             <radialGradient id="marsSurface" cx="40%" cy="30%" r="70%">
@@ -101,7 +101,7 @@ export function MarsPlanetSphere({ marsPlanetRef }: TMarsPlanetSphereProps) {
             opacity="0.45"
           />
 
-          {/* Surface Telemetry Beacon Nodes around Mars boundary */}
+          {/* Surface Telemetry Beacon Nodes */}
           <circle
             cx="200"
             cy="6"
@@ -110,15 +110,14 @@ export function MarsPlanetSphere({ marsPlanetRef }: TMarsPlanetSphereProps) {
             className="animate-ping"
           />
           <circle cx="200" cy="6" r="4" fill="#06b6d4" />
-
           <circle cx="394" cy="200" r="5" fill="#f59e0b" />
           <circle cx="6" cy="200" r="5" fill="#10b981" />
           <circle cx="200" cy="394" r="5" fill="#a855f7" />
         </svg>
 
         {/* Dynamic Surface Dust Storm Atmosphere Overlay */}
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_transparent_40%,_#451a03_90%)] opacity-60 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_transparent_40%,_#451a03_90%)] mix-blend-multiply opacity-60 pointer-events-none" />
       </div>
     </div>
-  )
+  );
 }
