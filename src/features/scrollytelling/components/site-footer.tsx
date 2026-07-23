@@ -8,11 +8,11 @@ type TSiteFooterProps = {
 };
 
 export function SiteFooter({ className = "" }: TSiteFooterProps) {
-  const { lenis } = useLenisScroll();
+  const { lenisRef } = useLenisScroll();
 
   const handleScrollTop = () => {
-    if (lenis) {
-      lenis.scrollTo(0);
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0);
     } else {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
