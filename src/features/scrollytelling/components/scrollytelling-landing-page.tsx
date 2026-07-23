@@ -2,10 +2,9 @@ import { SmoothScrollProvider } from "@/shared/components/providers/smooth-scrol
 import { StarfieldBackground } from "./starfield-background";
 import { ThrusterCursor } from "./thruster-cursor";
 import { ScrollProgressBar } from "./scroll-progress-bar";
-import { AudioController } from "./audio-controller";
-import { HeroSection } from "./hero-section";
-import { JourneySection } from "./journey-section";
-import { ArrivalSection } from "./arrival-section";
+import { HeroSection } from "./hero";
+import { JourneySection } from "./journey";
+import { ArrivalSection } from "./arrival";
 import { SiteFooter } from "./site-footer";
 
 export function ScrollytellingLandingPage() {
@@ -21,8 +20,6 @@ export function ScrollytellingLandingPage() {
         {/* Top Scroll HUD Progress Bar */}
         <ScrollProgressBar />
 
-        {/* Ambient Web Audio Controller */}
-        <AudioController />
 
         {/* Main Scrollytelling Narrative Sections */}
         <main className="relative z-10 flex flex-col">

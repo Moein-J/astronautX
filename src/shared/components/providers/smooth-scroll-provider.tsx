@@ -14,7 +14,9 @@ const SmoothScrollContext = createContext<TSmoothScrollContext | null>(null);
 export function useLenisScroll() {
   const ctx = useContext(SmoothScrollContext);
   if (!ctx) {
-    throw new Error("useLenisScroll must be used within a SmoothScrollProvider");
+    throw new Error(
+      "useLenisScroll must be used within a SmoothScrollProvider",
+    );
   }
   return ctx;
 }
@@ -27,24 +29,30 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-export function SmoothScrollProvider({ children }: TSmoothScrollProviderProps) {
+export function SmoothScrollProvider({
+  children,
+}: TSmoothScrollProviderProps) {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    // Browsers restore the previous scroll position on reload by default,
+    // Manual scroll restoration to prevent browser scroll jump on reload
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual";
     }
     window.scrollTo(0, 0);
 
+    const isTouch =
+      typeof window !== "undefined" &&
+      window.matchMedia("(pointer: coarse)").matches;
+
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: isTouch ? 0.8 : 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
       wheelMultiplier: 1,
-      touchMultiplier: 2,
+      touchMultiplier: 1,
     });
 
     lenisRef.current = lenis;
