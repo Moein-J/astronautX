@@ -67,7 +67,7 @@ export function HeroTelemetryCallouts({
 }: THeroTelemetryCalloutsProps) {
   return (
     <>
-      {/* Desktop & Laptop Parallax Callouts Overlay (Clean GSAP-controlled elements without CSS transition conflicts) */}
+      {/* Desktop & Laptop Parallax Callouts Overlay (High performance bg-slate-950/98 without backdrop-blur compositing lag) */}
       <div className="hidden md:block">
         {TELEMETRY_CALLOUTS.map((item, index) => {
           const isCentered = item.positionClasses.includes("text-center");
@@ -78,7 +78,7 @@ export function HeroTelemetryCallouts({
               ref={(el) => {
                 calloutsRef.current[index] = el;
               }}
-              className={`pointer-events-auto absolute z-20 rounded-xl border bg-slate-950/95 p-3 opacity-0 shadow-2xl backdrop-blur-md will-change-transform ${item.borderColor} ${item.positionClasses}`}
+              className={`pointer-events-auto absolute z-20 rounded-xl border bg-slate-950/98 p-3 opacity-0 shadow-2xl will-change-transform ${item.borderColor} ${item.positionClasses}`}
             >
               <div
                 className={`mb-1 flex items-center gap-1.5 ${

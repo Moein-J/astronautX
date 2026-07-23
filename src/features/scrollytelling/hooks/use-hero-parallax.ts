@@ -30,11 +30,11 @@ export function useHeroParallax() {
 
     const mm = gsap.matchMedia();
 
-    // Desktop Animation (Fast 0.5s Scrub, Smooth Touchpad Tracking & Linear Ease)
+    // Desktop Animation (Fast 0.5s Scrub, Smooth Touchpad Tracking & AutoAlpha GPU Fade)
     mm.add("(min-width: 768px)", () => {
       const screenH = typeof window !== "undefined" ? window.innerHeight : 800;
-      const maxY = Math.min(screenH * 0.18, 140);
-      const targetScale = screenH < 750 ? 1.35 : 1.75;
+      const maxY = Math.min(screenH * 0.15, 110);
+      const targetScale = screenH < 700 ? 1.15 : screenH < 780 ? 1.35 : 1.65;
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -49,18 +49,18 @@ export function useHeroParallax() {
 
       const [c1, c2, c3] = calloutsRef.current;
 
-      // Ensure callouts start completely hidden at scroll position 0 on desktop
-      if (c1) tl.set(c1, { opacity: 0, scale: 0.95 }, 0);
-      if (c2) tl.set(c2, { opacity: 0, scale: 0.95 }, 0);
-      if (c3) tl.set(c3, { opacity: 0, scale: 0.95 }, 0);
+      // Ensure callouts start completely hidden with autoAlpha (visibility: hidden when 0)
+      if (c1) tl.set(c1, { autoAlpha: 0, scale: 0.95 }, 0);
+      if (c2) tl.set(c2, { autoAlpha: 0, scale: 0.95 }, 0);
+      if (c3) tl.set(c3, { autoAlpha: 0, scale: 0.95 }, 0);
 
       // Hero main typography & buttons fade out smoothly
       tl.to(
         heroContent,
         {
-          opacity: 0,
-          y: -Math.min(screenH * 0.12, 90),
-          scale: 0.9,
+          autoAlpha: 0,
+          y: -Math.min(screenH * 0.1, 75),
+          scale: 0.92,
           duration: 0.35,
           ease: "none",
         },
@@ -69,14 +69,14 @@ export function useHeroParallax() {
 
       // Scroll hint fades out
       if (scrollHint) {
-        tl.to(scrollHint, { opacity: 0, y: 20, duration: 0.2, ease: "none" }, 0);
+        tl.to(scrollHint, { autoAlpha: 0, y: 20, duration: 0.2, ease: "none" }, 0);
       }
 
       // Cosmic background ring scale
       if (starRing) {
         tl.to(
           starRing,
-          { scale: 2.8, rotate: 120, opacity: 0.15, duration: 1, ease: "none" },
+          { scale: 2.5, rotate: 120, opacity: 0.12, duration: 1, ease: "none" },
           0,
         );
       }
@@ -87,66 +87,66 @@ export function useHeroParallax() {
         {
           scale: targetScale,
           y: -maxY,
-          x: 15,
-          rotateZ: -8,
+          x: 10,
+          rotateZ: -6,
           duration: 1,
           ease: "none",
         },
         0.1,
       );
 
-      // Sequentially fade callout cards with 1:1 linear scrub matching touchpad scroll
+      // Sequentially fade callout cards using GPU autoAlpha (instant 60fps tracking)
       if (c1) {
         tl.fromTo(
           c1,
-          { opacity: 0, scale: 0.95 },
-          { opacity: 1, scale: 1, duration: 0.22, ease: "none" },
+          { autoAlpha: 0, scale: 0.95 },
+          { autoAlpha: 1, scale: 1, duration: 0.18, ease: "none" },
           0.18,
         );
         tl.to(
           c1,
-          { opacity: 0, scale: 0.95, duration: 0.22, ease: "none" },
-          0.72,
+          { autoAlpha: 0, scale: 0.95, duration: 0.18, ease: "none" },
+          0.48,
         );
       }
 
       if (c2) {
         tl.fromTo(
           c2,
-          { opacity: 0, scale: 0.95 },
-          { opacity: 1, scale: 1, duration: 0.22, ease: "none" },
-          0.42,
+          { autoAlpha: 0, scale: 0.95 },
+          { autoAlpha: 1, scale: 1, duration: 0.18, ease: "none" },
+          0.46,
         );
         tl.to(
           c2,
-          { opacity: 0, scale: 0.95, duration: 0.22, ease: "none" },
-          0.8,
+          { autoAlpha: 0, scale: 0.95, duration: 0.18, ease: "none" },
+          0.72,
         );
       }
 
       if (c3) {
         tl.fromTo(
           c3,
-          { opacity: 0, scale: 0.95 },
-          { opacity: 1, scale: 1, duration: 0.22, ease: "none" },
-          0.62,
+          { autoAlpha: 0, scale: 0.95 },
+          { autoAlpha: 1, scale: 1, duration: 0.18, ease: "none" },
+          0.7,
         );
         tl.to(
           c3,
-          { opacity: 0, scale: 0.95, duration: 0.2, ease: "none" },
-          0.85,
+          { autoAlpha: 0, scale: 0.95, duration: 0.18, ease: "none" },
+          0.92,
         );
       }
     });
 
     // Mobile Layout (NO PINNING: Clean, unpinned responsive layout)
     mm.add("(max-width: 767px)", () => {
-      gsap.set(heroContent, { opacity: 1, y: 0, scale: 1 });
-      gsap.set(astroWrapper, { opacity: 1, y: 0, scale: 1, rotateZ: 0 });
+      gsap.set(heroContent, { autoAlpha: 1, y: 0, scale: 1 });
+      gsap.set(astroWrapper, { autoAlpha: 1, y: 0, scale: 1, rotateZ: 0 });
 
       const validCallouts = calloutsRef.current.filter(Boolean);
       validCallouts.forEach((card) => {
-        if (card) gsap.set(card, { opacity: 1, y: 0, scale: 1, x: 0 });
+        if (card) gsap.set(card, { autoAlpha: 1, y: 0, scale: 1, x: 0 });
       });
     });
 
