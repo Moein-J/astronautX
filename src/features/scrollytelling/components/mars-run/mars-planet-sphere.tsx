@@ -1,23 +1,23 @@
-"use client";
+'use client'
 
-import React, { RefObject } from "react";
+import { RefObject } from 'react'
 
 type TMarsPlanetSphereProps = {
-  marsPlanetRef: RefObject<HTMLDivElement | null>;
-};
+  marsPlanetRef: RefObject<HTMLDivElement | null>
+}
 
 export function MarsPlanetSphere({ marsPlanetRef }: TMarsPlanetSphereProps) {
   return (
-    <div className="relative flex items-center justify-center pointer-events-none">
+    <div className="pointer-events-none relative flex items-center justify-center">
       {/* Outer Atmospheric Red Glow Ring */}
-      <div className="absolute w-56 h-56 sm:w-72 sm:h-72 md:w-96 md:h-96 lg:w-128 lg:h-128 rounded-full bg-radial from-red-600/30 via-orange-600/15 to-transparent blur-2xl" />
+      <div className="absolute h-56 w-56 rounded-full bg-radial from-red-600/30 via-orange-600/15 to-transparent blur-2xl sm:h-72 sm:w-72 md:h-96 md:w-96 lg:h-128 lg:w-lg" />
 
       {/* Rotating Mars Circle matched dynamically to screen height */}
       <div
         ref={marsPlanetRef}
-        className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-[420px] lg:h-[420px] max-h-[38vh] max-w-[38vh] rounded-full shadow-[0_0_60px_rgba(239,68,68,0.4)] border-2 border-red-500/40 overflow-hidden"
+        className="relative h-48 max-h-[38vh] w-48 max-w-[38vh] overflow-hidden rounded-full border-2 border-red-500/40 shadow-[0_0_60px_rgba(239,68,68,0.4)] sm:h-64 sm:w-64 md:h-80 md:w-80 lg:h-105 lg:w-105"
       >
-        <svg viewBox="0 0 400 400" className="w-full h-full">
+        <svg viewBox="0 0 400 400" className="h-full w-full">
           <defs>
             {/* Mars Red Surface Radial Gradient */}
             <radialGradient id="marsSurface" cx="40%" cy="30%" r="70%">
@@ -116,8 +116,8 @@ export function MarsPlanetSphere({ marsPlanetRef }: TMarsPlanetSphereProps) {
         </svg>
 
         {/* Dynamic Surface Dust Storm Atmosphere Overlay */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_transparent_40%,_#451a03_90%)] mix-blend-multiply opacity-60 pointer-events-none" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,transparent_40%,#451a03_90%)] opacity-60 mix-blend-multiply" />
       </div>
     </div>
-  );
+  )
 }

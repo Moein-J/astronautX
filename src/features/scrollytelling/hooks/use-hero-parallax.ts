@@ -10,7 +10,8 @@ export function useHeroParallax() {
   const heroContentRef = useRef<HTMLDivElement | null>(null);
   const astroWrapperRef = useRef<HTMLDivElement | null>(null);
   const starRingRef = useRef<HTMLDivElement | null>(null);
-  const exoplanetRef = useRef<HTMLDivElement | null>(null);
+  const launchpadRef = useRef<HTMLDivElement | null>(null);
+  const solarSystemRef = useRef<HTMLDivElement | null>(null);
   const scrollHintRef = useRef<HTMLDivElement | null>(null);
   const calloutsRef = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -23,7 +24,8 @@ export function useHeroParallax() {
     const heroContent = heroContentRef.current;
     const astroWrapper = astroWrapperRef.current;
     const starRing = starRingRef.current;
-    const exoplanet = exoplanetRef.current;
+    const launchpad = launchpadRef.current;
+    const solarSystem = solarSystemRef.current;
     const scrollHint = scrollHintRef.current;
 
     if (!container || !heroContent || !astroWrapper || prefersReducedMotion) {
@@ -32,18 +34,19 @@ export function useHeroParallax() {
 
     const mm = gsap.matchMedia();
 
-    // Desktop Animation (Matched to Mars Section Physics: scrub: 1 & Clean Buffer before Unpinning)
+    // Desktop Extended Scroll Duration Lift-Off & Solar System Gateway Timeline
     mm.add("(min-width: 768px)", () => {
       const screenH = typeof window !== "undefined" ? window.innerHeight : 800;
-      const maxY = Math.min(screenH * 0.15, 110);
-      const targetScale = screenH < 700 ? 1.15 : screenH < 780 ? 1.35 : 1.65;
+      const liftOffY = -Math.min(screenH * 0.28, 220);
+      const initialScale = screenH < 750 ? 0.68 : 0.75;
+      const targetSpaceScale = screenH < 750 ? 1.25 : 1.55;
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: container,
           start: "top top",
-          end: "+=140%",
-          scrub: 1, // Matched 1:1 with Mars section for identical touchpad momentum physics
+          end: "+=230%", // Extended scroll duration for immersive scrollytelling
+          scrub: 1.2, // Smooth, luxurious scroll inertia tracking
           pin: true,
           anticipatePin: 1,
         },
@@ -51,90 +54,103 @@ export function useHeroParallax() {
 
       const [c1, c2, c3] = calloutsRef.current;
 
-      // Ensure callouts start completely hidden
+      // 0. Initial positions (Instant autoAlpha reveal at exact initial scale)
+      gsap.set(astroWrapper, { autoAlpha: 1, y: 0, scale: initialScale });
+      if (launchpad) gsap.set(launchpad, { y: 0, autoAlpha: 1 });
+      if (solarSystem) gsap.set(solarSystem, { autoAlpha: 0, scale: 0.6 });
+
       if (c1) tl.set(c1, { autoAlpha: 0, scale: 0.95 }, 0);
       if (c2) tl.set(c2, { autoAlpha: 0, scale: 0.95 }, 0);
       if (c3) tl.set(c3, { autoAlpha: 0, scale: 0.95 }, 0);
 
-      // Hero main typography & buttons fade out smoothly
+      // Phase 1: Launchpad Ignition & Hero Content Fade Out (0.0 -> 0.35)
       tl.to(
         heroContent,
         {
           autoAlpha: 0,
           y: -Math.min(screenH * 0.1, 75),
-          scale: 0.92,
-          duration: 0.3,
+          scale: 0.9,
+          duration: 0.35,
           ease: "power2.inOut",
         },
         0,
       );
 
-      // Scroll hint fades out
       if (scrollHint) {
-        tl.to(scrollHint, { autoAlpha: 0, y: 20, duration: 0.2 }, 0);
+        tl.to(scrollHint, { autoAlpha: 0, y: 20, duration: 0.25 }, 0);
       }
 
-      // Cosmic background ring scale & exoplanet parallax drift
-      if (starRing) {
+      // Launchpad platform slides down and recedes as astronaut lifts off
+      if (launchpad) {
         tl.to(
-          starRing,
-          { scale: 2.5, rotate: 120, opacity: 0.12, duration: 1 },
-          0,
+          launchpad,
+          { y: 350, autoAlpha: 0, duration: 0.45, ease: "power2.in" },
+          0.05,
         );
       }
 
-      if (exoplanet) {
-        tl.to(
-          exoplanet,
-          { y: 80, rotate: 15, scale: 1.1, opacity: 0.4, duration: 1 },
-          0,
-        );
-      }
-
-      // Astronaut rig scaling & floating movement
+      // Astronaut lifts off vertically from y: 0 (ground level) into deep space (-liftOffY)
       tl.to(
         astroWrapper,
         {
-          scale: targetScale,
-          y: -maxY,
-          x: 10,
+          y: liftOffY,
+          scale: targetSpaceScale,
           rotateZ: -6,
           duration: 1,
+          ease: "power1.out",
         },
-        0.1,
+        0.05,
       );
 
-      // Card 1: Hypergolic Vector (Top Left) - Enters 0.15 -> Exits 0.38
+      // Cosmic background ring scale
+      if (starRing) {
+        tl.to(
+          starRing,
+          { scale: 2.8, rotate: 120, opacity: 0.15, duration: 1 },
+          0,
+        );
+      }
+
+      // Phase 2: Solar System Gateway zooms into view in deep space (0.45 -> 1.0)
+      if (solarSystem) {
+        tl.to(
+          solarSystem,
+          { autoAlpha: 1, scale: 1.15, duration: 0.55, ease: "power2.out" },
+          0.45,
+        );
+      }
+
+      // Telemetry Card 1: Launchpad Ignition (0.10 -> 0.38)
       if (c1) {
         tl.fromTo(
           c1,
           { autoAlpha: 0, scale: 0.95, y: 15 },
-          { autoAlpha: 1, scale: 1, y: 0, duration: 0.12, ease: "power2.out" },
-          0.15,
+          { autoAlpha: 1, scale: 1, y: 0, duration: 0.14, ease: "power2.out" },
+          0.1,
         );
-        tl.to(c1, { autoAlpha: 0, scale: 0.95, duration: 0.11 }, 0.38);
+        tl.to(c1, { autoAlpha: 0, scale: 0.95, duration: 0.12 }, 0.38);
       }
 
-      // Card 2: Quantum Shielding (Top Right) - Enters 0.38 -> Exits 0.60
+      // Telemetry Card 2: Atmospheric Ascent (0.39 -> 0.65)
       if (c2) {
         tl.fromTo(
           c2,
           { autoAlpha: 0, scale: 0.95, y: 15 },
-          { autoAlpha: 1, scale: 1, y: 0, duration: 0.12, ease: "power2.out" },
-          0.38,
+          { autoAlpha: 1, scale: 1, y: 0, duration: 0.14, ease: "power2.out" },
+          0.39,
         );
-        tl.to(c2, { autoAlpha: 0, scale: 0.95, duration: 0.11 }, 0.60);
+        tl.to(c2, { autoAlpha: 0, scale: 0.95, duration: 0.12 }, 0.65);
       }
 
-      // Card 3: Orbital Insertion (Bottom Center) - Enters 0.60 -> Exits 0.82 (Leaving 0.82-1.00 completely clean for unpinning)
+      // Telemetry Card 3: Solar System Gateway (0.66 -> 0.88)
       if (c3) {
         tl.fromTo(
           c3,
           { autoAlpha: 0, scale: 0.95, y: 15 },
-          { autoAlpha: 1, scale: 1, y: 0, duration: 0.12, ease: "power2.out" },
-          0.60,
+          { autoAlpha: 1, scale: 1, y: 0, duration: 0.14, ease: "power2.out" },
+          0.66,
         );
-        tl.to(c3, { autoAlpha: 0, scale: 0.95, duration: 0.12 }, 0.82);
+        tl.to(c3, { autoAlpha: 0, scale: 0.95, duration: 0.12 }, 0.88);
       }
     });
 
@@ -142,6 +158,9 @@ export function useHeroParallax() {
     mm.add("(max-width: 767px)", () => {
       gsap.set(heroContent, { autoAlpha: 1, y: 0, scale: 1 });
       gsap.set(astroWrapper, { autoAlpha: 1, y: 0, scale: 1, rotateZ: 0 });
+
+      if (solarSystem) gsap.set(solarSystem, { autoAlpha: 0.4, scale: 0.9 });
+      if (launchpad) gsap.set(launchpad, { autoAlpha: 0.7, y: 0 });
 
       const validCallouts = calloutsRef.current.filter(Boolean);
       validCallouts.forEach((card) => {
@@ -159,7 +178,8 @@ export function useHeroParallax() {
     heroContentRef,
     astroWrapperRef,
     starRingRef,
-    exoplanetRef,
+    launchpadRef,
+    solarSystemRef,
     scrollHintRef,
     calloutsRef,
   };

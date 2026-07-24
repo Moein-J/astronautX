@@ -1,6 +1,6 @@
 'use client'
 
-import React, { RefObject } from 'react'
+import  { RefObject } from 'react'
 
 type TSpacewalkEarthRimProps = {
   earthRimRef: RefObject<HTMLDivElement | null>

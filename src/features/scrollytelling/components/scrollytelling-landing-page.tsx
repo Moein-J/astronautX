@@ -1,7 +1,6 @@
 import { SmoothScrollProvider } from '@/shared/components/providers/smooth-scroll-provider'
 import { StarfieldBackground } from './starfield-background'
 import { ThrusterCursor } from './thruster-cursor'
-import { ScrollProgressBar } from './scroll-progress-bar'
 import { HeroSection } from './hero'
 import { JourneySection } from './journey'
 import { MarsRunSection } from './mars-run'
@@ -19,9 +18,6 @@ export function ScrollytellingLandingPage() {
 
         {/* Custom Thruster Particle Cursor */}
         <ThrusterCursor />
-
-        {/* Top Scroll HUD Progress Bar */}
-        <ScrollProgressBar />
 
         {/* Main Scrollytelling Narrative Sections */}
         <main className="relative z-10 flex flex-col">
