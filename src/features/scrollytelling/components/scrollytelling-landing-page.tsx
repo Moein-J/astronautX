@@ -7,6 +7,7 @@ import { MarsRunSection } from './mars-run'
 import { ArrivalSection } from './arrival'
 import { ObservatorySection } from './observatory'
 import { SiteFooter } from './site-footer'
+import { ScrollProgressBar } from './scroll-progress-bar'
 
 export function ScrollytellingLandingPage() {
   return (
@@ -18,6 +19,9 @@ export function ScrollytellingLandingPage() {
 
         {/* Custom Thruster Particle Cursor */}
         <ThrusterCursor />
+
+        {/* Top Scroll HUD Progress Bar */}
+        <ScrollProgressBar />
 
         {/* Main Scrollytelling Narrative Sections */}
         <main className="relative z-10 flex flex-col">
