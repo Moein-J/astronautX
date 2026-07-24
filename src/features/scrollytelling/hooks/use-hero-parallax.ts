@@ -34,9 +34,12 @@ export function useHeroParallax() {
 
     const mm = gsap.matchMedia();
 
-    // Desktop Extended Scroll Duration Lift-Off & Solar System Gateway Timeline
+    // Desktop Launchpad Lift-Off & Solar System Gateway Timeline
     mm.add("(min-width: 768px)", () => {
       const screenH = typeof window !== "undefined" ? window.innerHeight : 800;
+
+      // Enforce a guaranteed minimum pixel scroll distance of 1850px for short height laptops
+      const scrollDistance = Math.max(Math.round(screenH * 2.2), 1850);
       const liftOffY = -Math.min(screenH * 0.28, 220);
       const initialScale = screenH < 750 ? 0.68 : 0.75;
       const targetSpaceScale = screenH < 750 ? 1.25 : 1.55;
@@ -45,8 +48,8 @@ export function useHeroParallax() {
         scrollTrigger: {
           trigger: container,
           start: "top top",
-          end: "+=230%", // Extended scroll duration for immersive scrollytelling
-          scrub: 1.2, // Smooth, luxurious scroll inertia tracking
+          end: `+=${scrollDistance}px`, // Absolute pixel scroll length prevents short-height touchpad lag
+          scrub: 1, // Smooth, 1:1 physics tracking
           pin: true,
           anticipatePin: 1,
         },
