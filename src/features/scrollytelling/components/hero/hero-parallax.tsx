@@ -6,6 +6,8 @@ import { HeroContent } from "./hero-content";
 import { HeroAstronautWrapper } from "./hero-astronaut-wrapper";
 import { HeroTelemetryCallouts } from "./hero-telemetry-callouts";
 import { HeroScrollHint } from "./hero-scroll-hint";
+import { HeroExoplanet } from "./hero-exoplanet";
+import { HeroShootingStars } from "./hero-shooting-stars";
 
 // ----- TYPES -----
 type THeroParallaxProps = {
@@ -24,6 +26,7 @@ export function HeroParallax(props: THeroParallaxProps) {
     heroContentRef,
     astroWrapperRef,
     starRingRef,
+    exoplanetRef,
     scrollHintRef,
     calloutsRef,
   } = useHeroParallax();
@@ -33,6 +36,12 @@ export function HeroParallax(props: THeroParallaxProps) {
       ref={containerRef}
       className="relative w-full min-h-dvh flex flex-col items-center justify-between py-4 sm:py-6 md:py-8 px-4 md:px-6 overflow-hidden bg-linear-to-b from-slate-950 via-slate-900/60 to-slate-950"
     >
+      {/* Ambient Shooting Comets & Micro-Gems */}
+      <HeroShootingStars />
+
+      {/* Floating Orbital Ringed Exoplanet with Scroll Parallax */}
+      <HeroExoplanet exoplanetRef={exoplanetRef} />
+
       {/* Background Cosmic Energy Ring */}
       <HeroBackgroundRing starRingRef={starRingRef} />
 
@@ -48,7 +57,7 @@ export function HeroParallax(props: THeroParallaxProps) {
         ctaText={ctaText}
       />
 
-      {/* Floating Astronaut Rig & Telemetry Callouts Overlay */}
+      {/* Floating Astronaut Rig & Recreated Cyber-Quantum Telemetry Callouts Overlay */}
       <div className="relative z-10 my-1.5 sm:my-3 md:my-4 flex items-center justify-center w-full max-w-4xl">
         <HeroAstronautWrapper astroWrapperRef={astroWrapperRef} />
         <HeroTelemetryCallouts calloutsRef={calloutsRef} />
