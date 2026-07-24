@@ -32,7 +32,7 @@ export function useHeroParallax() {
 
     const mm = gsap.matchMedia();
 
-    // Desktop Animation (Balanced Card Staging & Gentle Gradual Fade Out)
+    // Desktop Animation (Matched to Mars Section Physics: scrub: 1 & Clean Buffer before Unpinning)
     mm.add("(min-width: 768px)", () => {
       const screenH = typeof window !== "undefined" ? window.innerHeight : 800;
       const maxY = Math.min(screenH * 0.15, 110);
@@ -42,8 +42,8 @@ export function useHeroParallax() {
         scrollTrigger: {
           trigger: container,
           start: "top top",
-          end: "+=125%", // Slightly extended end distance for generous card display time
-          scrub: 0.5,
+          end: "+=140%",
+          scrub: 1, // Matched 1:1 with Mars section for identical touchpad momentum physics
           pin: true,
           anticipatePin: 1,
         },
@@ -52,9 +52,9 @@ export function useHeroParallax() {
       const [c1, c2, c3] = calloutsRef.current;
 
       // Ensure callouts start completely hidden
-      if (c1) tl.set(c1, { autoAlpha: 0, scale: 0.96 }, 0);
-      if (c2) tl.set(c2, { autoAlpha: 0, scale: 0.96 }, 0);
-      if (c3) tl.set(c3, { autoAlpha: 0, scale: 0.96 }, 0);
+      if (c1) tl.set(c1, { autoAlpha: 0, scale: 0.95 }, 0);
+      if (c2) tl.set(c2, { autoAlpha: 0, scale: 0.95 }, 0);
+      if (c3) tl.set(c3, { autoAlpha: 0, scale: 0.95 }, 0);
 
       // Hero main typography & buttons fade out smoothly
       tl.to(
@@ -64,21 +64,21 @@ export function useHeroParallax() {
           y: -Math.min(screenH * 0.1, 75),
           scale: 0.92,
           duration: 0.3,
-          ease: "none",
+          ease: "power2.inOut",
         },
         0,
       );
 
       // Scroll hint fades out
       if (scrollHint) {
-        tl.to(scrollHint, { autoAlpha: 0, y: 20, duration: 0.2, ease: "none" }, 0);
+        tl.to(scrollHint, { autoAlpha: 0, y: 20, duration: 0.2 }, 0);
       }
 
       // Cosmic background ring scale & exoplanet parallax drift
       if (starRing) {
         tl.to(
           starRing,
-          { scale: 2.5, rotate: 120, opacity: 0.12, duration: 1, ease: "none" },
+          { scale: 2.5, rotate: 120, opacity: 0.12, duration: 1 },
           0,
         );
       }
@@ -86,7 +86,7 @@ export function useHeroParallax() {
       if (exoplanet) {
         tl.to(
           exoplanet,
-          { y: 80, rotate: 15, scale: 1.1, opacity: 0.4, duration: 1, ease: "none" },
+          { y: 80, rotate: 15, scale: 1.1, opacity: 0.4, duration: 1 },
           0,
         );
       }
@@ -100,54 +100,41 @@ export function useHeroParallax() {
           x: 10,
           rotateZ: -6,
           duration: 1,
-          ease: "none",
         },
         0.1,
       );
 
-      // Card 1: Thrusters (Enters 0.14 -> Holds until 0.45 -> Gentle Fade 0.45-0.58)
+      // Card 1: Hypergolic Vector (Top Left) - Enters 0.15 -> Exits 0.38
       if (c1) {
         tl.fromTo(
           c1,
-          { autoAlpha: 0, scale: 0.96 },
-          { autoAlpha: 1, scale: 1, duration: 0.18, ease: "none" },
-          0.14,
+          { autoAlpha: 0, scale: 0.95, y: 15 },
+          { autoAlpha: 1, scale: 1, y: 0, duration: 0.12, ease: "power2.out" },
+          0.15,
         );
-        tl.to(
-          c1,
-          { autoAlpha: 0, scale: 0.96, duration: 0.14, ease: "none" },
-          0.45,
-        );
+        tl.to(c1, { autoAlpha: 0, scale: 0.95, duration: 0.11 }, 0.38);
       }
 
-      // Card 2: Quantum Shielding (Enters 0.36 -> Holds until 0.68 -> Gentle Fade 0.68-0.80)
+      // Card 2: Quantum Shielding (Top Right) - Enters 0.38 -> Exits 0.60
       if (c2) {
         tl.fromTo(
           c2,
-          { autoAlpha: 0, scale: 0.96 },
-          { autoAlpha: 1, scale: 1, duration: 0.18, ease: "none" },
-          0.36,
+          { autoAlpha: 0, scale: 0.95, y: 15 },
+          { autoAlpha: 1, scale: 1, y: 0, duration: 0.12, ease: "power2.out" },
+          0.38,
         );
-        tl.to(
-          c2,
-          { autoAlpha: 0, scale: 0.96, duration: 0.14, ease: "none" },
-          0.68,
-        );
+        tl.to(c2, { autoAlpha: 0, scale: 0.95, duration: 0.11 }, 0.60);
       }
 
-      // Card 3: Orbital Insertion (Enters 0.54 -> Holds comfortably until 0.88 -> Gentle gradual fade 0.88-1.02)
+      // Card 3: Orbital Insertion (Bottom Center) - Enters 0.60 -> Exits 0.82 (Leaving 0.82-1.00 completely clean for unpinning)
       if (c3) {
         tl.fromTo(
           c3,
-          { autoAlpha: 0, scale: 0.96 },
-          { autoAlpha: 1, scale: 1, duration: 0.2, ease: "none" },
-          0.54,
+          { autoAlpha: 0, scale: 0.95, y: 15 },
+          { autoAlpha: 1, scale: 1, y: 0, duration: 0.12, ease: "power2.out" },
+          0.60,
         );
-        tl.to(
-          c3,
-          { autoAlpha: 0, scale: 0.96, duration: 0.18, ease: "none" },
-          0.88,
-        );
+        tl.to(c3, { autoAlpha: 0, scale: 0.95, duration: 0.12 }, 0.82);
       }
     });
 

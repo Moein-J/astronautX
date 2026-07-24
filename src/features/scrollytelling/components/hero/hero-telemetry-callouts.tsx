@@ -39,7 +39,7 @@ const TELEMETRY_CALLOUTS: TTelemetryItem[] = [
     badgeBg: "bg-cyan-500/20 text-cyan-300 border-cyan-500/40",
     textColor: "text-cyan-400",
     positionClasses:
-      "top-0 left-2 md:left-4 lg:-left-4 xl:-left-12 w-64 md:w-72 lg:w-80 max-w-[90vw]",
+      "top-2 left-2 md:left-4 lg:left-6 xl:-left-8 w-60 md:w-64 lg:w-72 max-w-[90vw]",
   },
   {
     id: "maxq",
@@ -55,7 +55,7 @@ const TELEMETRY_CALLOUTS: TTelemetryItem[] = [
     badgeBg: "bg-purple-500/20 text-purple-300 border-purple-500/40",
     textColor: "text-purple-300",
     positionClasses:
-      "top-1/4 right-2 md:right-4 lg:-right-4 xl:-right-12 w-64 md:w-72 lg:w-80 max-w-[90vw]",
+      "top-2 right-2 md:right-4 lg:right-6 xl:-right-8 w-60 md:w-64 lg:w-72 max-w-[90vw]",
   },
   {
     id: "orbit",
@@ -71,7 +71,7 @@ const TELEMETRY_CALLOUTS: TTelemetryItem[] = [
     badgeBg: "bg-indigo-500/20 text-indigo-300 border-indigo-500/40",
     textColor: "text-indigo-300",
     positionClasses:
-      "bottom-2 md:bottom-4 lg:bottom-6 left-1/2 -translate-x-1/2 w-68 md:w-76 lg:w-84 max-w-[90vw] text-center",
+      "bottom-2 md:bottom-4 left-1/2 -translate-x-1/2 w-64 md:w-72 lg:w-80 max-w-[90vw] text-center",
   },
 ];
 
